@@ -3,12 +3,10 @@ import React, { Component } from 'react';
 import Task from './Task.jsx';
  
 // App component - represents the whole app
-export default class App extends Component {
-  getTasks() {   
-  }
+class App extends Component {
  
   renderTasks() {
-    return this.getTasks().map((task) => (
+    return  this.props.tasks.map((task) => (
       <Task key={task._id} task={task} />
     ));
   }
