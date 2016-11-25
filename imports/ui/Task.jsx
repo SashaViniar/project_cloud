@@ -17,7 +17,7 @@ export default class Task extends Component {
     // so that we can style them nicely in CSS
     const taskClassName = (this.props.task.checked ? 'checked' : '') + "form-group";
     return (
-      <li className={taskClassName}>      
+      <li className={taskClassName} style = {{margin:"5%"}}>      
         <input
           type="checkbox"
           readOnly
@@ -26,7 +26,7 @@ export default class Task extends Component {
         />
  
         <span className="text">{this.props.task.text}</span>
-          <button style = {{float:"right"}} className="btn btn-danger delete" onClick={this.deleteThisTask.bind(this)}>
+          <button style = {{float:"right" }} className="btn btn-danger delete" onClick={this.deleteThisTask.bind(this)}>
           &times;
         </button>
  
