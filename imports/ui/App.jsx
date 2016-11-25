@@ -8,13 +8,13 @@ import {
     createContainer
 }
 from 'meteor/react-meteor-data';
-
+import { Meteor } from 'meteor/meteor';
 import {
     Tasks
 }
 from '../api/tasks.js';
 import Task from './Task.jsx';
-
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 // App component - represents the whole app
 class App extends Component {
 
@@ -35,6 +35,8 @@ class App extends Component {
         Tasks.insert({
             text,
             createdAt: new Date(), // current time
+             owner: Meteor.userId(),           // _id of logged in user
+      username: Meteor.user().username,  // username of logged in user
         });
 
         // Clear form
@@ -71,13 +73,17 @@ class App extends Component {
             />
             Hide Completed Tasks
           </label>
-           <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-            <input
-              type="text"
-              ref="textInput"
-              placeholder="Type to add new tasks"
-            />
-          </form>
+            <AccountsUIWrapper />
+            { this.props.currentUser ?
+            <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+              <input
+                type="text"
+                ref="textInput"
+                placeholder="Type to add new tasks"
+              />
+            </form> : ''
+          }
+           
         </header>
  
         <ul>
@@ -92,6 +98,7 @@ class App extends Component {
 App.propTypes = {
     tasks: PropTypes.array.isRequired,
     incompleteCount: PropTypes.number.isRequired,
+     currentUser: PropTypes.object,
 };
 
 export default createContainer(() => {
@@ -106,5 +113,6 @@ export default createContainer(() => {
                 $ne: true
             }
         }).count(),
+         currentUser: Meteor.user(),
     };
 }, App);
