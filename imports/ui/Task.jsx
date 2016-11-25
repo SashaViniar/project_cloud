@@ -24,12 +24,14 @@ export default class Task extends Component {
           checked={this.props.task.checked}
           onClick={this.toggleChecked.bind(this)}
         />
- 
+         <span className="text">
+          <strong>{this.props.task.username}</strong>: {this.props.task.text}
+        </span>
         <span className="text">{this.props.task.text}</span>
           <button style = {{float:"right" }} className="btn btn-danger delete" onClick={this.deleteThisTask.bind(this)}>
           &times;
         </button>
- 
+      
       </li>
     );
   }
