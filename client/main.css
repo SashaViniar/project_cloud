@@ -1,1 +1,27 @@
 /* CSS declarations go here */
+.flex-container {
+	display: flex;
+	flex-flow: row wrap;
+    align-items: stretch;
+}
+
+.flex-navbar {
+	flex: 1 0 15em;
+}
+
+.flex-navbar ul, .flex-navbar li {
+	text-align: center;
+	width: 100%;
+}
+
+.flex-content {
+	flex: 1000 0 auto;
+}
+
+.h100 {
+	height: 100vh !important;
+}
+
+.cred {
+	background-color: red !important;
+}
