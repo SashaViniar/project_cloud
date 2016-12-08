@@ -1,125 +1,62 @@
-import React, {
-    Component,
-    PropTypes
-}
-from 'react';
-import ReactDOM from 'react-dom';
-import {
-    createContainer
-}
-from 'meteor/react-meteor-data';
-import { Meteor } from 'meteor/meteor';
-import {
-    Tasks
-}
-from '../api/tasks.js';
-import Task from './Task.jsx';
+import React from 'react';
+import Navbar from './Navbar.jsx';
+import Content from './Content.jsx';
+import Classie from './tympanus/classie.js';
+import DummyData from './tympanus/dummydata.js';
+import Main from './tympanus/main.js';
+import Modernizr from './tympanus/modernizr-custom.js';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+
 // App component - represents the whole app
-class App extends Component {
-
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            hideCompleted: false,
-        };
+class App extends React.Component {
+    componentDidMount(){
+              Modernizr(window,document);
+              Classie(window);
+              window.dummyData = DummyData;
+              Main(window);
+              var menuEl = document.getElementById('ml-menu'),
+                mlmenu = new MLMenu(menuEl, {
+                  backCtrl : false, // show back button
+                });
+              var openMenuCtrl = document.querySelector('.action--open'),
+                closeMenuCtrl = document.querySelector('.action--close');
+              openMenuCtrl.addEventListener('click', openMenu);
+              closeMenuCtrl.addEventListener('click', closeMenu);
+              function openMenu() {
+                window.classie.add(menuEl, 'menu--open');
+              }
+              function closeMenu() {
+                window.classie.remove(menuEl, 'menu--open');
+              }
+              var gridWrapper = document.querySelector('.content');
+              function loadDummyData(ev, itemName) {
+                ev.preventDefault();
+                closeMenu();
+                gridWrapper.innerHTML = '';
+                window.classie.add(gridWrapper, 'content--loading');
+                setTimeout(function() {
+                  window.classie.remove(gridWrapper, 'content--loading');
+                  gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '<ul>';
+                }, 700);
+              }
     }
-
-    handleSubmit(event) {
-        event.preventDefault();
-
-        // Find the text field via the React ref
-        const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-         Meteor.call('tasks.insert', text);
-
-
-
-        
-        // Clear form
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';
-    }
-
-    toggleHideCompleted() {
-        this.setState({
-            hideCompleted: !this.state.hideCompleted,
-        });
-    }
-
-    renderTasks() {
-        let filteredTasks = this.props.tasks;
-        if (this.state.hideCompleted) {
-            filteredTasks = filteredTasks.filter(task => !task.checked);
-        }  
-         return filteredTasks.map((task) => {
-      const currentUserId = this.props.currentUser && this.props.currentUser._id;
-      const showPrivateButton = task.owner === currentUserId;
- 
-      return (
-        <Task
-          key={task._id}
-          task={task}
-          showPrivateButton={showPrivateButton}
-        />
-      );
-    });
-    }
-
     render() {
         return (
-            <div className="container">
-        <header>
-          <h1>Todo List ({this.props.incompleteCount})</h1>
-           <label className="hide-completed">
-            <input
-              type="checkbox"
-              readOnly
-              checked={this.state.hideCompleted}
-              onClick={this.toggleHideCompleted.bind(this)}
-            />
-            Hide Completed Tasks
-          </label>
-            <AccountsUIWrapper />
-            { this.props.currentUser ?
-            <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-              <input
-                type="text"
-                ref="textInput"
-                placeholder="Type to add new tasks"
-              />
-            </form> : ''
-          }
-           
-        </header>
- 
-        <ul>
-          {this.renderTasks()}
-        </ul>
-      </div>
+            <div>
+              <div className="container">
+                <header className="bp-header cf">
+                  <div className="bp-header__main">
+                    <nav className="bp-nav" />
+                  </div>
+                </header>
+                <button className="action action--open" aria-label="Open Menu"><span className="icon icon--menu"></span></button>
+                <Navbar />
+                <AccountsUIWrapper />
+                <Content className="content" />
+              </div>
+            </div>
         );
     }
 }
 
-
-App.propTypes = {
-    tasks: PropTypes.array.isRequired,
-    incompleteCount: PropTypes.number.isRequired,
-     currentUser: PropTypes.object,
-};
-
-export default createContainer(() => {
-   Meteor.subscribe('tasks');
-    return {
-        tasks: Tasks.find({}, {
-            sort: {
-                createdAt: -1
-            }
-        }).fetch(),
-        incompleteCount: Tasks.find({
-            checked: {
-                $ne: true
-            }
-        }).count(),
-         currentUser: Meteor.user(),
-    };
-}, App);
+export default App;
