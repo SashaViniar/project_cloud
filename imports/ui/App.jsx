@@ -4,7 +4,8 @@ import Content from './Content.jsx';
 import Classie from './tympanus/classie.js';
 import DummyData from './tympanus/dummydata.js';
 import Main from './tympanus/main.js';
-import Modernizr from './tympanus/modernizr-custom.js'
+import Modernizr from './tympanus/modernizr-custom.js';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 // App component - represents the whole app
 class App extends React.Component {
@@ -50,6 +51,7 @@ class App extends React.Component {
                 </header>
                 <button className="action action--open" aria-label="Open Menu"><span className="icon icon--menu"></span></button>
                 <Navbar />
+                <AccountsUIWrapper />
                 <Content className="content" />
               </div>
             </div>
