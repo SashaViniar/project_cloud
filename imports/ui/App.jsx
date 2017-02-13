@@ -51,7 +51,6 @@ class App extends React.Component {
                 </header>
                 <button className="action action--open" aria-label="Open Menu"><span className="icon icon--menu"></span></button>
                 <Navbar />
-                <AccountsUIWrapper />
                 <Content className="content" />
               </div>
             </div>
