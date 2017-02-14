@@ -11,7 +11,7 @@ class App extends React.Component {
 			    <div className="row">
 			      <img src="https://placeholdit.imgix.net/~text?txtsize=66&txt=Logo&w=200&h=200" alt="" />
 			    </div>
-			    <div className="row">
+			    <div className="row loginHeading">
 			      <h1>Site name</h1>
 			    </div>
 			  </div>
