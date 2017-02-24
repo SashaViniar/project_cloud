@@ -17,7 +17,8 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/beta', {
   action() {
-  	$('body').css('background-image','url(/bg.jpg)');
+  	// $('body').css('background-image','url(/bg.jpg)');
+  	$('body').css('background','#1c1d22');
     render(<Login />, document.getElementById('render-target'));
   }
 });

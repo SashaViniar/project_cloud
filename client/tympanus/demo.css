@@ -35,7 +35,7 @@
 
 body {
 	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-	overflow: hidden;
+	overflow-x: hidden;
 	margin: 0;
 	color: #cecece;
 	background: #2a2b30;
