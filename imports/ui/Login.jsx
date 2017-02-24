@@ -15,12 +15,13 @@ class App extends React.Component {
 						<h1>Project Cloud</h1>
 					</div>
 				</div>
+				<div className="row centr">
+					<h4 className="light-font">Authentication:</h4>
+				</div>
 				<div className="row">
 					<div className="col-md-2 col-xs-1"></div>
 					<div className="col-md-8 col-xs-10 dashed-border">
-						<div className="row centr">
-							<h4 className="light-font">Authentication:</h4>
-						</div>
+						
 						<div className="row vcentr">
 							<div className="col-md-5">
 								<AccountsUIWrapper/>
@@ -37,15 +38,15 @@ class App extends React.Component {
 											<img width="100%" src="/google.svg" alt=""/>
 										</div>
 										<div className="col-xs-6 alignl">
-											<img width="100%" src="https://facebookbrand.com/wp-content/themes/fb-branding/prj-fb-branding/assets/images/fb-art.png" alt=""/>
+											<img width="100%" src="/facebook.svg" alt=""/>
 										</div>
 									</div>
 									<div className="row">
 										<div className="col-xs-6 alignr">
-											<img width="100%" src="http://wedare.in/extra/img/twittericon.png" alt=""/>
+											<img width="100%" src="/twitter.svg" alt=""/>
 										</div>
 										<div className="col-xs-6 alignl">
-											<img width="100%" src="https://img.clipartfest.com/3b699171bf127b4583f94e6b88e9536f_read-our-linkedin-handout-for-linkedin-clipart-transparent-background_1000-1000.png" alt=""/>
+											<img width="100%" src="/linkedin.svg" alt=""/>
 										</div>
 									</div>
 									<div className="row" style={{"height":"1em"}}></div>
