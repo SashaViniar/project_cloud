@@ -1,8 +1,30 @@
 import React from 'react';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+import { Accounts } from 'meteor/accounts-base';
 
 // Login component - represents the whole app
 class Login extends React.Component {
+	constructor() {
+		super();
+		Template.login.events({
+			'click #signin': function(e) {
+				e.preventDefault();
+				var login = $("#login").val();
+				var password = $("#password").val();
+				Meteor.loginWithPassword(login, password, error=>{
+					if(error) {
+						alert(error);
+					} else {
+						FlowRouter.go('/');
+					}
+				});
+			},
+			'click #signup': function(e) {
+				e.preventDefault();
+				FlowRouter.go('/register');
+			}
+		});
+	}
 	render() {
 		return (
 			<div>

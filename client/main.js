@@ -11,7 +11,9 @@ import './main.html';
 
 FlowRouter.route('/', {
   action() {
+    if(!Meteor.userId()) FlowRouter.go('/login');
   	$('body').css('background-image','none');
+    $('body').css('background','#fff');
     render(<App />, document.getElementById('render-target'));
   }
 });
@@ -33,6 +35,6 @@ FlowRouter.route('/register', {
 });
 
 Meteor.startup(() => {
-	  // render(<App />, document.getElementById('render-target'));
+	  
 });
 
