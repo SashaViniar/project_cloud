@@ -1,8 +1,8 @@
 import React from 'react';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
-// App component - represents the whole app
-class App extends React.Component {
+// Login component - represents the whole app
+class Login extends React.Component {
 	render() {
 		return (
 			<div>
@@ -64,4 +64,4 @@ class App extends React.Component {
 }
 				
 
-export default App;
+export default Login;

@@ -5,6 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../imports/startup/accounts-config.js';
 import App from '../imports/ui/App.jsx';
 import Login from '../imports/ui/Login.jsx';
+import Register from '../imports/ui/Register.jsx';
 import './main.html';
 
 
@@ -15,13 +16,22 @@ FlowRouter.route('/', {
   }
 });
 
-FlowRouter.route('/beta', {
+FlowRouter.route('/login', {
   action() {
   	// $('body').css('background-image','url(/bg.jpg)');
   	$('body').css('background','#1c1d22');
     render(<Login />, document.getElementById('render-target'));
   }
 });
+
+FlowRouter.route('/register', {
+  action() {
+    // $('body').css('background-image','url(/bg.jpg)');
+    $('body').css('background','#1c1d22');
+    render(<Register />, document.getElementById('render-target'));
+  }
+});
+
 Meteor.startup(() => {
 	  // render(<App />, document.getElementById('render-target'));
 });
