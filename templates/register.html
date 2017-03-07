@@ -1,10 +1,18 @@
-<template name="regist">
+<template name="register">
 	<form class="form-horizontal blur">
       <fieldset>
+          <div class="form-group">
+          <label class="col-md-4 control-label" for="textinput">UserName</label>  
+          <div class="col-md-8">
+            <input id="login" type="text" name="registEmail" placeholder="Type your username here" class="form-control input-md">
+          <!-- <span class="help-block">help</span>   -->
+          </div>
+        </div>
+
         <div class="form-group">
           <label class="col-md-4 control-label" for="textinput">Email</label>  
           <div class="col-md-8">
-            <input id="textinput" type="email" name="registEmail" placeholder="Type your mail here" class="form-control input-md">
+            <input id="email" type="email" name="registEmail" placeholder="Type your mail here" class="form-control input-md">
           <!-- <span class="help-block">help</span>   -->
           </div>
         </div>
@@ -12,7 +20,7 @@
         <div class="form-group">
           <label class="col-md-4 control-label" for="passwordinput">Password</label>
           <div class="col-md-8">
-            <input id="passwordinput" type="password" name="registPassword" placeholder="Type your password here" class="form-control input-md" required="">
+            <input id="password" type="password" name="registPassword" placeholder="Type your password here" class="form-control input-md" required="">
             <!-- <span class="help-block">help</span> -->
           </div>
         </div>

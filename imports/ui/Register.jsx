@@ -3,6 +3,28 @@ import RegisterUIWrapper from './RegisterUIWrapper.jsx';
 
 // Register component - represents the whole app
 class Register extends React.Component {
+	constructor() {
+		super();
+		Template.register.events({
+			'click #signup': function(e) {
+				e.preventDefault();
+				var username = $("#login").val();
+				var email = $("#email").val();
+				var password = $("#password").val();
+				Meteor.createUser(username, email,password, error=>{
+					if(error) {
+						alert(error);
+					} else {
+						FlowRouter.go('/');
+					}
+				});
+			},
+			'click #signin': function(e) {
+				e.preventDefault();
+				FlowRouter.go('/login');
+			}
+		});
+	}
 	render() {
 		return (
 			<div>
