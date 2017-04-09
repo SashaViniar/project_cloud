@@ -1,6 +1,7 @@
 import React from 'react';
 import RegisterUIWrapper from './RegisterUIWrapper.jsx';
-import { Accounts } from 'meteor/accounts-base';
+import { login } from '../api/accounts';
+
 
 // Register component - represents the whole app
 class Register extends React.Component {
@@ -12,15 +13,24 @@ class Register extends React.Component {
         var username = $("#login").val();
         var email = $("#email").val();
         var password = $("#password").val();
-        Meteor.createUser(username, email, password, error=>{
-          if(error) {
-            alert(error);
+        // console.log(register("password"));
+        Meteor.call('register', {type:"password", username, email, password}, (err, res) => {
+          if (err) {
+            alert(err);
           } else {
+            login("password")(username,password);
             FlowRouter.go('/');
           }
         });
+        // register("password")({username, email, password}, error => {
+        //   if(error) {
+        //     alert(error);
+        //   } else {
+        //     FlowRouter.go('/');
+        //   }
+        // });
       },
-      'click #signin': function(e) {
+      'click #back': function(e) {
         e.preventDefault();
         FlowRouter.go('/login');
       }

@@ -1,31 +1,34 @@
 import React from 'react';
+import {logout} from '../api/accounts';
 
-var MenuItemLink = (props) => {
+const MenuItemLink = (props) => {
   return(
-    <li className="menu__item"><a className="menu__link" href="#">{props.caption}</a></li>
+    <li className="menu__item"><a className="menu__link" onClick={props.action} href="#">{props.caption}</a></li>
   );
 }
 
-var SubMenuLink = (props) => {
+const SubMenuLink = (props) => {
   return(
     <li className="menu__item"><a className="menu__link" data-submenu={props.submenu} href="#">{props.caption}</a></li>
   );
 }
 
-var Menu = (props) => {
+const Menu = (props) => {
   return(
     <ul data-menu={props.name} className="menu__level">
       {
-        props.items.map(x=>
+        props.items.map((x,i)=>
           x[0]=="submenu"?
-            <SubMenuLink submenu={x[2]} caption={x[1]} />
+            <SubMenuLink key={i} submenu={x[2]} caption={x[1]} />
           :
-            <MenuItemLink caption={x[1]} />
+            <MenuItemLink key={i} caption={x[1]} action={x[2]} />
         )
       }
     </ul>
   );
 }
+
+
 
 class Navbar extends React.Component {
   render(){
@@ -38,7 +41,7 @@ class Navbar extends React.Component {
               ["submenu", "Fruits", "submenu-2"],
               ["submenu", "Grains", "submenu-3"],
               ["submenu", "Mylk & Drinks", "submenu-4"],
-              ["link", "Logout"]
+              ["link", "Logout", logout]
             ]} />
             <Menu name="submenu-1" items={[
               ["link", "Stalk Vegetables"],

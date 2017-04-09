@@ -1,7 +1,6 @@
 import React from 'react';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
-import { Accounts } from 'meteor/accounts-base';
-
+import { login } from '../api/accounts';
 // Login component - represents the whole app
 class Login extends React.Component {
   constructor() {
@@ -9,9 +8,9 @@ class Login extends React.Component {
     Template.login.events({
       'click #signin': function(e) {
         e.preventDefault();
-        var login = $("#login").val();
+        var username = $("#login").val();
         var password = $("#password").val();
-        Meteor.loginWithPassword(login, password, error=>{
+        login("password")(username, password, error=>{
           if(error) {
             alert(error);
           } else {
