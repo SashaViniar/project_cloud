@@ -5,7 +5,7 @@ import { login } from '../api/accounts';
 class Reset extends React.Component {
   constructor() {
     super();
-    Template.regist.events({
+    Template.resetPassword.events({
       'click #signin': function(e) {
         e.preventDefault();
         FlowRouter.go('/login');
