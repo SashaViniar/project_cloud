@@ -5,7 +5,6 @@ import Classie from './tympanus/classie.js';
 import DummyData from './tympanus/dummydata.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 // App component - represents the whole app
 class App extends React.Component {

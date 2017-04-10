@@ -1,5 +1,5 @@
 import React from 'react';
-import RegisterUIWrapper from './RegisterUIWrapper.jsx';
+import UIWrapper from './UIWrapper.jsx';
 import { login } from '../api/accounts';
 
 
@@ -56,7 +56,7 @@ class Register extends React.Component {
               <div className="col-md-4"></div>
               <div className="col-md-4 dashed-border">
                 <div className="row" style={{"height":"1em"}}></div>
-                <RegisterUIWrapper/>
+                <UIWrapper template="register" />
               </div>
               <div className="col-md-4"></div>
             </div>

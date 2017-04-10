@@ -5,7 +5,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import '../imports/startup/accounts-config.js';
 import App from '../imports/ui/App.jsx';
 import Login from '../imports/ui/Login.jsx';
-import Reset from '../imports/ui/resetPassword.jsx';
+import Reset from '../imports/ui/Reset.jsx';
 import Register from '../imports/ui/Register.jsx';
 import './main.html';
 
@@ -27,7 +27,7 @@ FlowRouter.route('/login', {
   }
 });
 
-FlowRouter.route('/resetPassword', {
+FlowRouter.route('/reset', {
   action() {
     // $('body').css('background-image','url(/bg.jpg)');
     $('body').css('background','#1c1d22');

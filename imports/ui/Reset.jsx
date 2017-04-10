@@ -1,11 +1,11 @@
 import React from 'react';
-import ResetPasswordUIWrapper from './ResetPasswordUIWrapper.jsx';
+import UIWrapper from './UIWrapper.jsx';
 import { login } from '../api/accounts';
 // Login component - represents the whole app
 class Reset extends React.Component {
   constructor() {
     super();
-    Template.resetPassword.events({
+    Template.reset.events({
       'click #signin': function(e) {
         e.preventDefault();
         FlowRouter.go('/login');
@@ -33,7 +33,7 @@ class Reset extends React.Component {
             
             <div className="row vcentr">
               <div className="col-md-5">
-                <ResetPasswordUIWrapper/>
+                <UIWrapper template="reset"/>
               </div>
               
             </div>

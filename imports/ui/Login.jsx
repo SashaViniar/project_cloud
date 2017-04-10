@@ -1,5 +1,5 @@
 import React from 'react';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+import UIWrapper from './UIWrapper.jsx';
 import { login } from '../api/accounts';
 // Login component - represents the whole app
 class Login extends React.Component {
@@ -45,7 +45,7 @@ class Login extends React.Component {
             
             <div className="row vcentr">
               <div className="col-md-5">
-                <AccountsUIWrapper/>
+                <UIWrapper template="login" />
               </div>
               <div className="col-md-2 centr light-font">
                 <h2 className="m0">OR</h2>

@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom';
 import { Template } from 'meteor/templating';
 import { Blaze } from 'meteor/blaze';
  
-export default class ResetPasswordUIWrapper extends Component {
+export default class UIWrapper extends Component {
   componentDidMount() {
     // Use Meteor Blaze to render login buttons
-    this.view = Blaze.render(Template.resetPassword,
+    this.view = Blaze.render(Template[this.props.template],
       ReactDOM.findDOMNode(this.refs.container));
   }
   componentWillUnmount() {
