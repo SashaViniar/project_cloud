@@ -23,6 +23,11 @@ Meteor.methods({
     }
 
     return true;
+  },
+  passwordRecover(args) {
+    const emailOrLogin = args.input;
+    //TODO: code
+    return true;
   }
 });
 
