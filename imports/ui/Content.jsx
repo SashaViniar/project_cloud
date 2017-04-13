@@ -36,16 +36,16 @@ class Content extends React.Component {
             filteredTasks = filteredTasks.filter(task => !task.checked);
         }  
          return filteredTasks.map((task) => {
-      const currentUserId = this.props.currentUser && this.props.currentUser._id;
-      const showPrivateButton = task.owner === currentUserId;
- 
-      return (
-        <Task
-          key={task._id}
-          task={task}
-          showPrivateButton={showPrivateButton}
-        />
-      );
+          const currentUserId = this.props.currentUser && this.props.currentUser._id;
+          const showPrivateButton = task.owner === currentUserId;
+     
+          return (
+            <Task
+              key={task._id}
+              task={task}
+              showPrivateButton={showPrivateButton}
+            />
+          );
     });
     }
 
