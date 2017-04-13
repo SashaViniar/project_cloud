@@ -24,9 +24,19 @@ Meteor.methods({
 
     return true;
   },
-  passwordRecover(args) {
+  reset(args) {
     const emailOrLogin = args.input;
-    //TODO: code
+    
+    console.log(emailOrLogin);
+    
+    const id = Meteor.users.find({$or: [
+      {username: emailOrLogin},
+      {emails: {
+        $elemMatch: {address: emailOrLogin}
+      }}
+    ]}).fetch()[0];
+    if(!id) throw new Meteor.Error('user-not-found', "No such user");
+    Accounts.sendResetPasswordEmail(id._id);
     return true;
   }
 });
