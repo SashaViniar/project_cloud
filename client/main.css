@@ -81,3 +81,7 @@
   text-align: right;
   padding-right: 0px !important;
 }
+
+.li-none-marker{
+  list-style-type: none;
+}
