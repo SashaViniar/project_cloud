@@ -68,6 +68,10 @@
   margin: 0;
 }
 
+.mr0{
+  margin-right: 0;
+}
+
 .p0{
   padding: 0;
 }
@@ -80,4 +84,7 @@
 .alignr{
   text-align: right;
   padding-right: 0px !important;
+}
+.slide-trans {
+  transition: width 2s;
 }

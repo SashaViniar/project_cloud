@@ -42,7 +42,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-              <div className="container">
+              <div className="container mr0">
                 <header className="bp-header cf">
                   <div className="bp-header__main">
                     <nav className="bp-nav" />
