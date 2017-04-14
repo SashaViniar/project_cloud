@@ -15,14 +15,14 @@ class Content extends React.Component {
         };
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        // Find the text field via the React ref
-        const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-         Meteor.call('tasks.insert', text);
-        // Clear form
-        ReactDOM.findDOMNode(this.refs.textInput).value = '';
-    }
+    // handleSubmit(event) {
+    //     event.preventDefault();
+    //     // Find the text field via the React ref
+    //     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    //     Meteor.call('tasks.insert', text);
+    //     // Clear form
+    //     ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    // }
 
     toggleHideCompleted() {
         this.setState({
@@ -63,17 +63,7 @@ class Content extends React.Component {
 						/>
 						Hide Completed Tasks
 					</label>
-					{ this.props.currentUser ?
-						<form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-							<input
-							  type="text"
-							  ref="textInput"
-							  placeholder="Type to add new tasks"
-							/>
-						</form> : ''
-					}
 				</header>
-
 				<ul>
 					{this.renderTasks()}
 				</ul>
@@ -106,3 +96,15 @@ export default createContainer(() => {
          currentUser: Meteor.user(),
     };
 }, Content);
+
+//Creating:
+
+// { this.props.currentUser ?
+//             <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+//               <input
+//                 type="text"
+//                 ref="textInput"
+//                 placeholder="Type to add new tasks"
+//               />
+//             </form> : ''
+//           }

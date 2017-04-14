@@ -28,32 +28,18 @@ const Menu = (props) => {
   );
 }
 
-const hideNav = () => {
-  const widths = $("nav")
-  .splice(1,2)
-  .map($)
-  .map(x => x.css("width"));
-
-  $("nav")
-  .splice(1,2)
-  .map($)
-  .forEach(x => x.css("width","0"));
-}
-
-const taskCreate = () => {
-  alert("Here we create a new task");
-  // const save = hideNav();
-  $("nav").animate({'width': 'toggle'});
+const taskCreate = go => () => {
+  go("creator");
 }
 
 class Navbar extends React.Component {
   render(){
   	return(
-	    <nav id="ml-menu" className="menu slide-trans">
+	    <nav id="ml-menu" className="menu">
           <button className="action action--close" aria-label="Close Menu"><span className="icon icon--cross"></span></button>
           <div className="menu__wrap">
             <Menu name="main" items={[
-              ["link", "Create a new task", taskCreate],
+              ["link", "Create a new task", taskCreate(this.props.go)],
               ["submenu", "Vegetables", "submenu-1"],
               ["submenu", "Fruits", "submenu-2"],
               ["submenu", "Grains", "submenu-3"],
