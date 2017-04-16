@@ -46,8 +46,8 @@ export default class Task extends Component {
           &times;
         </button>
           
-        <p className = "centr"  onClick = {fadeo("#task"+this.props._id).bind(this)}>Description : {this.props.task.description}</p>
-        <div className="col-md-12" id = {"task" + this.props._id}>
+        <p className = "centr"  onClick = {fadeo("#task"+this.props.task._id).bind(this)}>Description : {this.props.task.description}</p>
+        <div className="col-md-12" id = {"task" + this.props.task._id}>
           <div className="col-md-6">
             <div>
                   <p className="centr">IN</p>
