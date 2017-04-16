@@ -15,14 +15,7 @@ class Content extends React.Component {
         };
     }
 
-    // handleSubmit(event) {
-    //     event.preventDefault();
-    //     // Find the text field via the React ref
-    //     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-    //     Meteor.call('tasks.insert', text);
-    //     // Clear form
-    //     ReactDOM.findDOMNode(this.refs.textInput).value = '';
-    // }
+    
 
     toggleHideCompleted() {
         this.setState({
@@ -97,14 +90,3 @@ export default createContainer(() => {
     };
 }, Content);
 
-//Creating:
-
-// { this.props.currentUser ?
-//             <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-//               <input
-//                 type="text"
-//                 ref="textInput"
-//                 placeholder="Type to add new tasks"
-//               />
-//             </form> : ''
-//           }
