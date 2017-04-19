@@ -32,3 +32,5 @@ aldeed:template-extension
 facebook-config-ui@1.0.0
 github-config-ui@1.0.0
 google-config-ui@1.0.0
+appcache
+ground:db
