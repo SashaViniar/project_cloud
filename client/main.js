@@ -8,7 +8,7 @@ import Login from '../imports/ui/Login.jsx';
 import Reset from '../imports/ui/Reset.jsx';
 import Register from '../imports/ui/Register.jsx';
 import './main.html';
-
+import BackgroundEvents from '../imports/cordova/events.js';
 
 FlowRouter.route('/', {
   action() {
@@ -47,3 +47,15 @@ Meteor.startup(() => {
 	  
 });
 
+if(Meteor.isCordova){
+  Meteor.startup(() => {
+    let plugin = cordova.plugins.backgroundMode;
+    plugin.setDefaults({ color: 'F14F4D' });
+    plugin.overrideBackButton();
+
+    plugin.on('activate', BackgroundEvents.onModeActivated);
+    plugin.on('deactivate', BackgroundEvents.onModeDeactivated);
+    plugin.on('enable', BackgroundEvents.onModeEnabled);
+    plugin.on('disable', BackgroundEvents.onModeDisabled);
+  });
+}

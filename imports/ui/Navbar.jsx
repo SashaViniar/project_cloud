@@ -17,7 +17,7 @@ const Menu = (props) => {
   return(
     <ul data-menu={props.name} className="menu__level">
       {
-        props.items.map((x,i)=>
+        props.items.filter(x=>x!==undefined).map((x,i)=>
           x[0]=="submenu"?
             <SubMenuLink key={i} submenu={x[2]} caption={x[1]} />
           :
@@ -36,6 +36,13 @@ const home = go => () => {
   go("content");
 }
 
+const cordovaToggle = () => {
+  if(Meteor.isCordova){
+    let plugin = cordova.plugins.backgroundMode;
+    plugin.setEnabled(!plugin.isEnabled());
+  }
+}
+
 class Navbar extends React.Component {
   render(){
   	return(
@@ -49,7 +56,8 @@ class Navbar extends React.Component {
               ["submenu", "Fruits", "submenu-2"],
               ["submenu", "Grains", "submenu-3"],
               ["submenu", "Mylk & Drinks", "submenu-4"],
-              ["link", "Logout", logout]
+              ["link", "Logout", logout],
+              Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle] : undefined,
             ]} />
             <Menu name="submenu-1" items={[
               ["link", "Stalk Vegetables"],
