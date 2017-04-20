@@ -21,6 +21,8 @@ class App extends React.Component {
   go(name){
     if(states.includes(name))
       this.setState(appState(name));
+    var menuEl = document.getElementById('ml-menu');
+    window.classie.remove(menuEl, 'menu--open');
   }
 
   getContent(){

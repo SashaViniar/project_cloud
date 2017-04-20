@@ -32,6 +32,10 @@ const taskCreate = go => () => {
   go("creator");
 }
 
+const home = go => () => {
+  go("content");
+}
+
 class Navbar extends React.Component {
   render(){
   	return(
@@ -39,6 +43,7 @@ class Navbar extends React.Component {
           <button className="action action--close" aria-label="Close Menu"><span className="icon icon--cross"></span></button>
           <div className="menu__wrap">
             <Menu name="main" items={[
+              ["link", "Dashboard", home(this.props.go)],
               ["link", "Create a new task", taskCreate(this.props.go)],
               ["submenu", "Vegetables", "submenu-1"],
               ["submenu", "Fruits", "submenu-2"],
