@@ -57,5 +57,9 @@ if(Meteor.isCordova){
     plugin.on('deactivate', BackgroundEvents.onModeDeactivated);
     plugin.on('enable', BackgroundEvents.onModeEnabled);
     plugin.on('disable', BackgroundEvents.onModeDisabled);
+
+    plugin.setEnabled(true);
+    
+    cordova.plugins.autoStart.enable();
   });
 }
