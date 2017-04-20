@@ -3,6 +3,7 @@ import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
 
 export const Tasks = new Mongo.Collection('tasks');
+Ground.Collection(Tasks);
  
 if (Meteor.isServer) {
   // This code only runs on the server

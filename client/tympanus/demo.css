@@ -53,7 +53,7 @@ a:hover {
 	color: #ddd;
 }
 
-.container {
+.tympanus-container {
 	overflow-y: auto;
 	height: 100vh;
 }
@@ -228,7 +228,7 @@ a:hover {
 .content {
 	position: relative;
 	min-height: 300px;
-	margin: 0 0 0 300px;
+	margin: 0 0 0 350px;
 }
 
 .content--loading {
@@ -295,7 +295,7 @@ body #cdawrap a:hover.carbon-poweredby {
 		display: none;
 	}
 	.content {
-		margin: 0;
+		margin: 0 0 0 15px;
 	}
 	body,
 	.container {
