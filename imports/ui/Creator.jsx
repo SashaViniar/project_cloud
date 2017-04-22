@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Meteor} from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor';
+import { TestTokenizer } from '../core/CalcCore';
+
+const checkFileAPI = () => window.File && window.FileReader && window.FileList && window.Blob;
 
 class Creator extends React.Component {
   handleSubmit(event) {
