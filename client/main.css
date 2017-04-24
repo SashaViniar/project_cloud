@@ -93,3 +93,42 @@
 .li-none-marker{
   list-style-type: none;
 }
+
+.dummy {
+  background-color: gray;
+  border: 1px solid;
+  min-height: 267px !important;
+  outline: 2px dashed;
+  outline-offset: -5px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tfu-head {
+  border-bottom: 1px solid;
+  margin-bottom: 2px;
+}
+
+.txt-input-area {
+  resize: none;
+  min-height: 200px !important;
+}
+
+.file-drag-area {
+  border-color: #333;
+  outline-color: #333;
+  border: 1px solid;
+  min-height: 200px !important;
+  outline: 2px dashed;
+  outline-offset: -15px;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.file-drag-area input[type="file"] {
+  display: none;
+}
