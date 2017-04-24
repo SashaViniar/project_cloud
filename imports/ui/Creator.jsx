@@ -29,19 +29,19 @@ class Creator extends React.Component {
             />
           </div>
           <div className="col-md-12 row">
-            <div className="col-md-4">
+            <div className="col-md-4 col-xs-12">
               <TextFileUploader 
                 className="col-md-12" 
                 name="algorithm"
                 caption="Data processing algorithm:"/>
             </div>
-            <div className="col-md-4">
+            <div className="col-md-4 col-xs-12">
               <TextFileUploader 
                 className="col-md-12" 
                 name="data"
                 caption="Data to process(CSV):"/>
             </div>
-            <div className="col-md-4"><div className="col-md-12 dummy">REDUCER(OPTIONAL):<br/>COMING SOON</div></div>
+            <div className="col-md-4 col-xs-12"><div className="col-md-12 dummy">REDUCER(OPTIONAL):<br/>COMING SOON</div></div>
           </div>
           <div className="col-md-12 centr">
             <button>Submit task</button>
