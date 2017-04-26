@@ -109,7 +109,9 @@ const smartTokenize = functions => algorithm => {
 
     return OQ;
   } catch (e) {
-    return e;
+    if(e.type=="error")
+      return e;
+    else return error("Unexpected token ILLEGAL.")
   }
 }
 
