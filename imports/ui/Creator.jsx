@@ -14,6 +14,15 @@ class Creator extends React.Component {
     const description = ReactDOM.findDOMNode(this.refs.description).value.trim();
     // Validation
     var valid = true;
+    try{
+      valid = valid && (TestTokenizer(algorithm).type != "error");
+      console.log("pass:");
+      console.log(TestTokenizer(algorithm).name);
+    } catch(e) {
+      valid = false;
+      alert("Please, check your input");
+      return;
+    }
     if(!valid){
       alert("Please, check your input");
       return;

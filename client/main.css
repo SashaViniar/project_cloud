@@ -141,3 +141,30 @@
   resize: none;
   min-height: 30px !important;
 }
+
+.color-white{
+  color:white;
+}
+
+.navbar .navbar-inverse{
+  background:"#1c1d22";
+
+}
+.stylebro{
+  height:200px;width:100%;border:1px solid white;padding-bottom:50px;
+}
+.thisdesc{
+  height:100px;width:100%;border:1px solid white;margin-bottom:50px;
+}
+.taskdescr{
+  text-align:center;color:white;
+}
+.tascname{
+  text-align:center;color:white;
+}
+
+pre{
+      border: transparent !important;
+    background: transparent !important;
+    color: #ccc !important;
+}
