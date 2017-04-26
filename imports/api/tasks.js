@@ -8,13 +8,47 @@ Ground.Collection(Tasks);
 if (Meteor.isServer) {
   // This code only runs on the server
   Meteor.publish('tasks', function tasksPublication() {
-  	  return Tasks.find({
+    return Tasks.find({
       $or: [
         { private: { $ne: true } },
         { owner: this.userId },
       ],
     });    
-  	   });
+  });
+
+  Meteor.methods({
+    'tasks.get'() {
+      const task = Tasks.findOne({checked: false}, {sort:{$natural:-1}});//TODO: priority,etc
+
+      if(task){
+        return {
+          id: task._id,
+          algorithm: task.algorithm,
+          data: task.data
+        }
+      } else {
+        return 0;
+      }
+    },
+    'tasks.resolve'(id, result) {
+      check(result, [Number]);
+
+      const task = Tasks.findOne({_id: id});
+      if(!task) throw new Meteor.Error('Incorrect task id');
+
+      Tasks.update(
+        { _id: id },
+        {
+          $set: {
+            output: result,
+            checked: true
+          }
+        }
+      );
+
+      return true;
+    }
+  })
 } 
  
 Meteor.methods({
@@ -39,6 +73,8 @@ Meteor.methods({
       createdAt: new Date(),
       owner: this.userId,
       username: Meteor.users.findOne(this.userId).username,
+      checked: false,
+      output: []
     });
   },
   'tasks.remove'(taskId) {
@@ -53,7 +89,7 @@ Meteor.methods({
   'tasks.setChecked'(taskId, setChecked) {
     check(taskId, String);
     check(setChecked, Boolean);
-      const task = Tasks.findOne(taskId);
+    const task = Tasks.findOne(taskId);
     if (task.private && task.owner !== this.userId) {
       // If the task is private, make sure only the owner can check it off
       throw new Meteor.Error('not-authorized');
@@ -61,7 +97,7 @@ Meteor.methods({
  
     Tasks.update(taskId, { $set: { checked: setChecked } });
   },
-   'tasks.setPrivate'(taskId, setToPrivate) {
+  'tasks.setPrivate'(taskId, setToPrivate) {
     check(taskId, String);
     check(setToPrivate, Boolean);
  

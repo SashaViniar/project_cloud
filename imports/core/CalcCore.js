@@ -121,7 +121,10 @@ const CalcCore = (algorithm, input) => {
 
     var inputManager = {
       currentRow: 0,
-      get: i => input[inputManager.currentRow][i]
+      get: i => {
+        if(i<0 || i>= input[inputManager.currentRow].length)
+          throw error("Input index out of bounds.");
+        else return input[inputManager.currentRow][i]}
     };
 
     const functions = functionsGenerator(inputManager, output);

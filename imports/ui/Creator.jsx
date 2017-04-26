@@ -12,9 +12,14 @@ class Creator extends React.Component {
     const data = this.refs.data.getInput();
     const name = ReactDOM.findDOMNode(this.refs.name).value.trim();
     const description = ReactDOM.findDOMNode(this.refs.description).value.trim();
+    // Validation
+    var valid = true;
+    if(!valid){
+      alert("Please, check your input");
+      return;
+    }
+    // Insertion
     Meteor.call('tasks.insert', {algorithm, data, name, description});
-    // Clear form
-    // ReactDOM.findDOMNode(this.refs.textInput).value = '';
     this.props.go("content");
   }
   render(){
