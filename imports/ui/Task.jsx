@@ -29,16 +29,15 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
-
-            <li className={taskClassName} style = {{margin:"5%"}}>      
-        <input
-          type="checkbox"
-          readOnly
-          checked={this.props.task.checked}
-          onClick={this.toggleChecked.bind(this)}
-        />
-        { this.props.showPrivateButton ? (
-          <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
+           <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"5%"}}>      
+         <div className="navbar navbar-inverse">
+      <div className="col-md-12">
+        <div className="col-md-6">
+          <h4>Task {this.props.task.name} created by {this.props.task.username} </h4>
+        </div>
+        <div className="col-md-4">
+          { this.props.showPrivateButton ? (
+          <button className="toggle-private btn btn-primary" onClick={this.togglePrivate.bind(this)}>
             { this.props.task.private ? 'Private' : 'Public' }
             
           </button>
@@ -70,7 +69,6 @@ export default class Task extends Component {
             <pre>{this.props.task.algorithm}</pre>
           </div>
         </div>
-
         <div className="col-md-4">
           <h4 className="taskdescr">DATA</h4>
           <div className = "stylebro thisdesc">
@@ -90,6 +88,7 @@ export default class Task extends Component {
     </li>
           
        
+
         );
     }
 }
