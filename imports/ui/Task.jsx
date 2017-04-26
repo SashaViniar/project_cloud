@@ -29,6 +29,7 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
+
             <li className={taskClassName} style = {{margin:"5%"}}>      
         <input
           type="checkbox"
@@ -39,33 +40,56 @@ export default class Task extends Component {
         { this.props.showPrivateButton ? (
           <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
             { this.props.task.private ? 'Private' : 'Public' }
+            
           </button>
         ) : ''}
-        <span className="text"><strong>{this.props.task.username}</strong>: {this.props.task.name}</span>
-        <button style = {{float:"right" }} className="btn btn-danger delete" onClick={this.deleteThisTask.bind(this)}>
-          &times;
-        </button>
+        </div>
+        <div className="col-md-2">
+          <h2><button className = "btn btn-primary" style ={{float:"right"}}>S</button><button className = "btn btn-primary" style ={{float:"right"}}  onClick={this.deleteThisTask.bind(this)}>X</button></h2>
+        </div>
+        
+      </div>
+      
+      
+      <div className="col-md-12">
+          <h2 className="tascname">This is Task Name</h2>
+      </div>
+      <div className="col-md-12">
+        <div>
+          <h2 className = "taskdescr">This is Task Description</h2>
           
-        <p className = "centr"  onClick = {fadeo("#task"+this.props.task._id).bind(this)}>Description : {this.props.task.description}</p>
-        <div className="col-md-12" id = {"task" + this.props.task._id}>
-          <div className="col-md-6">
-            <div>
-                  <p className="centr">ALGORITHM</p>
-                  <br/>
-                  <div className = "dashed-border">
-                       <pre>{this.props.task.algorithm}</pre>
-                  </div>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <p className="centr">DATA</p>
-              <br/>
-              <div className = "dashed-border">
-                   <pre>{this.props.task.data}</pre>
-              </div>
+          <div className="thisdesc" >
+              {this.props.task.description}  
           </div>
         </div>
-      </li>
+      </div>
+      <div className="col-md-12">
+        <div className="col-md-4">
+          <h4 className="taskdescr">ALGORITHM</h4>
+          <div className = "stylebro thisdesc">
+            <pre>{this.props.task.algorithm}</pre>
+          </div>
+        </div>
+
+        <div className="col-md-4">
+          <h4 className="taskdescr">DATA</h4>
+          <div className = "stylebro thisdesc">
+            <pre>{this.props.task.data}</pre>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <h4 className="taskdescr">OUTPUT</h4>
+          <div className = "stylebro thisdesc" onClick = {this.toggleChecked.bind(this)}>
+              { this.props.task.checked ? "done" : "fresh"}
+              
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    </li>
+          
+       
         );
     }
 }
