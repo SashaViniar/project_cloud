@@ -141,3 +141,12 @@
   resize: none;
   min-height: 30px !important;
 }
+
+.color-white{
+  color:white;
+}
+
+.navbar .navbar-inverse{
+  background:"#1c1d22";
+
+}

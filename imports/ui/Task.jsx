@@ -29,19 +29,9 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
-          <div className="col-md-12">
-            <div className="col-md-8">
-              <div className = "special-margin">
-            <div className="container">
-                <div className="navbar navbar-inverse">
-                    <p>This is task name</p>
-                </div>
-            </div>
-          </div>
-            </div>
-          </div>
+         
           
-         /*  <li className={taskClassName} style = {{margin:"5%"}}>      
+          <li className={taskClassName + "navbar navbar-inverse color-white"} style = {{margin:"5%"}}>      
         <input
           type="checkbox"
           readOnly
@@ -49,17 +39,18 @@ export default class Task extends Component {
           onClick={this.toggleChecked.bind(this)}
         />
         { this.props.showPrivateButton ? (
-          <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
+          <button className="toggle-private btn btn-primary" onClick={this.togglePrivate.bind(this)}>
             { this.props.task.private ? 'Private' : 'Public' }
+            
           </button>
         ) : ''}
-        <span className="text"><strong>{this.props.task.username}</strong>: {this.props.task.name}</span>
-        <button style = {{float:"right" }} className="btn btn-danger delete" onClick={this.deleteThisTask.bind(this)}>
+        <div className="bg-primary"> <span className="text color-white"><strong>{this.props.task.username}</strong>: {this.props.task.name}</span></div> 
+        <button style = {{float:"right" }} className="btn btn-danger delete " onClick={this.deleteThisTask.bind(this)}>
           &times;
         </button>
           
-        <p className = "centr"  onClick = {fadeo("#task"+this.props.task._id).bind(this)}>Description : {this.props.task.description}</p>
-        <div className="col-md-12" id = {"task" + this.props.task._id}>
+        <p className = "centr color-white"  onClick = {fadeo("#task"+this.props.task._id).bind(this)}>Description : {this.props.task.description}</p>
+        <div className="col-md-12 color-white" id = {"task" + this.props.task._id}>
           <div className="col-md-6">
             <div>
                   <p className="centr">ALGORITHM</p>
@@ -77,7 +68,8 @@ export default class Task extends Component {
               </div>
           </div>
         </div>
-      </li>*/
+      </li>
+
         );
     }
 }
