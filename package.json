@@ -10,8 +10,9 @@
     "classnames": "^2.2.5",
     "cordova": "^6.5.0",
     "meteor-node-stubs": "^0.2.5",
-    "react": "^15.5.3",
+    "react": "^15.5.4",
     "react-addons-pure-render-mixin": "^15.5.2",
-    "react-dom": "^15.5.3"
+    "react-addons-transition-group": "^15.5.2",
+    "react-dom": "^15.5.4"
   }
 }
