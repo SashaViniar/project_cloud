@@ -18,16 +18,24 @@ if (Meteor.isServer) {
 } 
  
 Meteor.methods({
-  'tasks.insert'(text) {
-    check(text, String);
+  'tasks.insert'(task) {
+    check(task.algorithm, String);
+    check(task.data, String);
+    check(task.name, String);
+    check(task.description, String);
  
     // Make sure the user is logged in before inserting a task
     if (! this.userId) {
       throw new Meteor.Error('not-authorized');
     }
- 
+    
+    //TODO: do parallellism here by inserting several subtasks
+
     Tasks.insert({
-      text,
+      algorithm: task.algorithm,
+      data: task.data,
+      name: task.name,
+      description: task.description,
       createdAt: new Date(),
       owner: this.userId,
       username: Meteor.users.findOne(this.userId).username,

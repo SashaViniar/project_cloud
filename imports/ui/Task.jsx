@@ -53,14 +53,29 @@ export default class Task extends Component {
             { this.props.task.private ? 'Private' : 'Public' }
           </button>
         ) : ''}
-        <span className="text"><strong>{this.props.task.username}</strong>: {this.props.task.textInput}</span>
+        <span className="text"><strong>{this.props.task.username}</strong>: {this.props.task.name}</span>
         <button style = {{float:"right" }} className="btn btn-danger delete" onClick={this.deleteThisTask.bind(this)}>
           &times;
         </button>
           
         <p className = "centr"  onClick = {fadeo("#task"+this.props.task._id).bind(this)}>Description : {this.props.task.description}</p>
         <div className="col-md-12" id = {"task" + this.props.task._id}>
-          
+          <div className="col-md-6">
+            <div>
+                  <p className="centr">ALGORITHM</p>
+                  <br/>
+                  <div className = "dashed-border">
+                       <pre>{this.props.task.algorithm}</pre>
+                  </div>
+            </div>
+          </div>
+          <div className="col-md-6">
+            <p className="centr">DATA</p>
+              <br/>
+              <div className = "dashed-border">
+                   <pre>{this.props.task.data}</pre>
+              </div>
+          </div>
         </div>
       </li>*/
         );
