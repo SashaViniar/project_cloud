@@ -9,6 +9,7 @@ import Reset from '../imports/ui/Reset.jsx';
 import Register from '../imports/ui/Register.jsx';
 import './main.html';
 import BackgroundEvents from '../imports/cordova/events.js';
+import { CalcCore } from '../imports/core/CalcCore';
 
 FlowRouter.route('/', {
   action() {
@@ -61,5 +62,30 @@ if(Meteor.isCordova){
     plugin.setEnabled(true);
     
     cordova.plugins.autoStart.enable();
+  });
+}
+
+// Client side calc - debug mode
+// TODO: move to imports/cordova/events.js
+// TODO: make interval configurable
+if(Meteor.isClient){
+  Meteor.startup(() => {
+    let timer = setInterval(() => {
+      console.log("I'm working");
+      Meteor.call("tasks.get",(err,task)=>{
+        // console.log(task);
+        if(task == 0) console.log("No task available");
+        else {
+          // console.log(`Task algorithm: ${task.algorithm}`);
+          const data = task.data.split("\n").map(x=>(x.match(/[\-\+]?\d+(\.\d+)?/g)||[]).map(x=>+x));
+          // console.log(data);
+          const result = CalcCore(task.algorithm, data);
+          if(result.type=="error")
+            console.log(`Error: ${result.value}`);
+          else console.log(result.value);
+          Meteor.call("tasks.resolve", task.id, result.value);
+        }
+      });
+    }, 10000);
   });
 }
