@@ -29,7 +29,19 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
-            <li className={taskClassName} style = {{margin:"5%"}}>      
+          <div className="col-md-12">
+            <div className="col-md-8">
+              <div className = "special-margin">
+            <div className="container">
+                <div className="navbar navbar-inverse">
+                    <p>This is task name</p>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+          
+         /*  <li className={taskClassName} style = {{margin:"5%"}}>      
         <input
           type="checkbox"
           readOnly
@@ -65,7 +77,7 @@ export default class Task extends Component {
               </div>
           </div>
         </div>
-      </li>
+      </li>*/
         );
     }
 }
