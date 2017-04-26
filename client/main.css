@@ -107,7 +107,7 @@
 }
 
 .tfu-head {
-  border-bottom: 1px solid;
+  /*border-bottom: 1px solid;*/
   margin-bottom: 2px;
 }
 
@@ -131,4 +131,9 @@
 
 .file-drag-area input[type="file"] {
   display: none;
+}
+
+.description-area {
+  resize: none;
+  min-height: 30px !important;
 }

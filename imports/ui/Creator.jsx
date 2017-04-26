@@ -8,10 +8,13 @@ class Creator extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     // Find the text field via the React ref
-    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
-    Meteor.call('tasks.insert', text);
+    const algorithm = this.refs.algorithm.getInput();
+    const data = this.refs.data.getInput();
+    const name = ReactDOM.findDOMNode(this.refs.name).value.trim();
+    const description = ReactDOM.findDOMNode(this.refs.description).value.trim();
+    Meteor.call('tasks.insert', {algorithm, data, name, description});
     // Clear form
-    ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    // ReactDOM.findDOMNode(this.refs.textInput).value = '';
     this.props.go("content");
   }
   render(){
@@ -22,24 +25,37 @@ class Creator extends React.Component {
         </header>
         <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
           <div className="col-md-12">
+            <label htmlFor="name" className="col-md-2 col-xs-6">Task name:&nbsp;&nbsp;</label>
             <input
+              className="col-md-3 col-xs-6"
               type="text"
-              ref="textInput"
-              placeholder="Type to add new tasks"
-            />
+              ref="name"
+              name="name"
+              placeholder="Type task name here"/>
+          </div>
+          <div className="col-md-12">
+            <label htmlFor="description" className="col-md-2 col-xs-6">Task description:&nbsp;&nbsp;</label>
+            <textarea
+              className="col-md-5 col-xs-6 description-area"
+              type="text"
+              ref="description"
+              name="description"
+              placeholder="Type task description here"/>
           </div>
           <div className="col-md-12 row">
             <div className="col-md-4 col-xs-12">
               <TextFileUploader 
                 className="col-md-12" 
                 name="algorithm"
-                caption="Data processing algorithm:"/>
+                caption="Data processing algorithm:"
+                ref="algorithm"/>
             </div>
             <div className="col-md-4 col-xs-12">
               <TextFileUploader 
                 className="col-md-12" 
                 name="data"
-                caption="Data to process(CSV):"/>
+                caption="Data to process(CSV):"
+                ref="data"/>
             </div>
             <div className="col-md-4 col-xs-12"><div className="col-md-12 dummy">REDUCER(OPTIONAL):<br/>COMING SOON</div></div>
           </div>
@@ -54,4 +70,7 @@ class Creator extends React.Component {
 
 export default Creator;
 
-//TODO: Design good task addition form
+//TODO: Implement dragover animations
+
+
+

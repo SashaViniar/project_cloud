@@ -55,7 +55,7 @@ class TextFileUploader extends React.Component {
 
   onTextChange(e){
     const val = e.target.value;
-    console.log(val);
+    // console.log(val);
     this.setState((state, props) => {
       state.data = val;
       return state;
