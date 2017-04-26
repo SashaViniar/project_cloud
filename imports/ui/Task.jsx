@@ -29,7 +29,19 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
-            <li className={taskClassName} style = {{margin:"5%"}}>      
+          <div className="col-md-12">
+            <div className="col-md-8">
+              <div className = "special-margin">
+            <div className="container">
+                <div className="navbar navbar-inverse">
+                    <p>This is task name</p>
+                </div>
+            </div>
+          </div>
+            </div>
+          </div>
+          
+         /*  <li className={taskClassName} style = {{margin:"5%"}}>      
         <input
           type="checkbox"
           readOnly
@@ -41,35 +53,16 @@ export default class Task extends Component {
             { this.props.task.private ? 'Private' : 'Public' }
           </button>
         ) : ''}
-        <span className="text"><strong>{this.props.task.username}</strong>: {this.props.task.text}</span>
+        <span className="text"><strong>{this.props.task.username}</strong>: {this.props.task.textInput}</span>
         <button style = {{float:"right" }} className="btn btn-danger delete" onClick={this.deleteThisTask.bind(this)}>
           &times;
         </button>
           
         <p className = "centr"  onClick = {fadeo("#task"+this.props.task._id).bind(this)}>Description : {this.props.task.description}</p>
         <div className="col-md-12" id = {"task" + this.props.task._id}>
-          <div className="col-md-6">
-            <div>
-                  <p className="centr">IN</p>
-                  <br/>
-                  <div className = "dashed-border">
-                       {this.props.task.in}
-                       Hellnfds
-                       fnsjakf
-                       skalk
-                  </div>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <p className="centr">OUT</p>
-              <br/>
-              <div className = "dashed-border">
-                   {this.props.task.out}
-                   v,sanvl nskl bcjksa bcsjav 
-              </div>
-          </div>
+          
         </div>
-      </li>
+      </li>*/
         );
     }
 }

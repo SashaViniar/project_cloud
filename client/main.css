@@ -12,7 +12,11 @@
 .centr {
 	text-align: center;
 }
-
+.special-margin{
+  margin:2%;
+  color: white;
+  margin-right: 10%;
+}
 .blur{
 	z-index: 1;
 	color: #ccc;
