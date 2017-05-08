@@ -77,12 +77,13 @@ if(Meteor.isClient){
         if(task == 0) console.log("No task available");
         else {
           // console.log(`Task algorithm: ${task.algorithm}`);
-          const data = task.data.split("\n").map(x=>(x.match(/[\-\+]?\d+(\.\d+)?/g)||[]).map(x=>+x));
+          const data = task.data;
           // console.log(data);
           const result = CalcCore(task.algorithm, data);
           if(result.type=="error")
             console.log(`Error: ${result.value}`);
           else console.log(result.value);
+          // console.log(result);
           Meteor.call("tasks.resolve", task.id, result.value);
         }
       });
