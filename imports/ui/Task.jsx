@@ -78,7 +78,7 @@ export default class Task extends Component {
         <div className="col-md-4">
           <h4 className="taskdescr">OUTPUT</h4>
           <div className = "stylebro thisdesc" onClick = {this.toggleChecked.bind(this)}>
-            <pre>{ this.props.task.checked ? this.props.task.output : "fresh"}</pre>
+            <pre>{this.props.task.output}</pre>
               
           </div>
         </div>

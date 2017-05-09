@@ -15,18 +15,27 @@ const partitionArray = (array, size) =>
 
 if (Meteor.isServer) {
   // This code only runs on the server
-
   Meteor.publish('tasks', function tasksPublication() {
-    ReactiveAggregate(this, Tasks, [
-      { $match: {
+    let matcher;
+    if(Roles.userIsInRole(this.userId,['admin'])){
+      matcher = {
+        $match: {}
+      }
+    } else {
+      matcher = { 
+        $match: {
           $or: [
             { private: { $ne: true } },
             { owner: this.userId },
           ]
         }
-      },
+      }
+    }
+    ReactiveAggregate(this, Tasks, [
+      matcher,
       // { $unwind: "$output" },
-      { $group: {
+      { 
+        $group: {
           _id: "$groupID", 
           progress: { $avg: { $cond: ["$checked",1,0] } }, 
           results: { $push: "$output" }, 
@@ -37,10 +46,12 @@ if (Meteor.isServer) {
           description: { $first: "$description" },
           createdAt: { $first: "$createdAt" },
           owner: { $first: "$owner" },
-          username: { $first: "$username" }
+          username: { $first: "$username" },
+          private: { $first: "$private" }
         }
       },
-      { $project: {
+      { 
+        $project: {
           progress: 1,
           output: {$cond: [
             {$eq: ["$progress",1]},
@@ -55,8 +66,14 @@ if (Meteor.isServer) {
           createdAt: 1,
           owner: 1,
           username: 1,
-          checked: { $literal: true }
-      }}
+          checked: {$cond: [
+            {$eq: ["$progress",1]},
+            true,
+            false
+          ]},
+          private: 1
+        }
+      }
     ]);
   });
 
@@ -155,14 +172,15 @@ if (Meteor.isServer) {
           output: [],
           groupID: groupID._str,
           expiry: new Date(),
-          failCount: 0
+          failCount: 0,
+          private: true
         });
       });
     },
     'tasks.remove'(taskId) {
       check(taskId, String);
       const task = Tasks.find({groupID: taskId});
-      if (task.private && task.owner !== this.userId) {
+      if (task.private && task.owner !== this.userId && !(Roles.userIsInRole(this.userId,['admin']))) {
         // If the task is private, make sure only the owner can delete it
         throw new Meteor.Error('not-authorized');
       }
@@ -172,7 +190,7 @@ if (Meteor.isServer) {
       check(taskId, String);
       check(setChecked, Boolean);
       const task = Tasks.find({groupID: taskId});
-      if (task.private && task.owner !== this.userId) {
+      if (task.private && task.owner !== this.userId && !(Roles.userIsInRole(this.userId,['admin']))) {
         // If the task is private, make sure only the owner can check it off
         throw new Meteor.Error('not-authorized');
       }
@@ -186,7 +204,7 @@ if (Meteor.isServer) {
       const task = Tasks.find({groupID: taskId});
    
       // Make sure only the task owner can make a task private
-      if (task.owner !== this.userId) {
+      if (task.owner !== this.userId && !(Roles.userIsInRole(this.userId,['admin']))) {
         throw new Meteor.Error('not-authorized');
       }
    
