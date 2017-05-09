@@ -5,7 +5,8 @@ import { check } from 'meteor/check';
 export const Tasks = new Mongo.Collection('tasks');
 Ground.Collection(Tasks);
  
-const bigDataCount = 2;
+const bigDataCount = 2; // minimum data size to split
+const delta = 1000*60*5; // milliseconds for task capture expiry
 
 const partitionArray = (array, size) => 
   array.map((e,i) => (i % size === 0) ? array.slice(i, i + size) : null)
@@ -44,7 +45,7 @@ if (Meteor.isServer) {
           output: {$cond: [
             {$eq: ["$progress",1]},
             "$results",
-            {$concat: [{$substr: ["$progress",0,-1]}, "% done."]}
+            {$concat: [{$substr: [{$multiply: ["$progress", 100]},0,-1]}, "% done."]}
           ]},
           name: 1,
           algorithm: 1,
@@ -61,9 +62,16 @@ if (Meteor.isServer) {
 
   Meteor.methods({
     'tasks.get'() {
-      const task = Tasks.findOne({checked: false}, {sort:{$natural:-1}});//TODO: priority,etc
+      const task = Tasks.findOne({checked: false, expiry: {$lt: new Date()}}, {sort:{$natural:-1}});//TODO: priority,etc
 
       if(task){
+        Tasks.update({
+          _id: task._id
+        },{
+          $set: {
+            expiry: new Date(+(new Date()) + delta)
+          }
+        })
         return {
           id: task._id,
           algorithm: task.algorithm,
@@ -120,7 +128,8 @@ if (Meteor.isServer) {
           username: Meteor.users.findOne(this.userId).username,
           checked: false,
           output: [],
-          groupID: groupID._str
+          groupID: groupID._str,
+          expiry: new Date()
         });
       });
     },
@@ -142,7 +151,7 @@ if (Meteor.isServer) {
         throw new Meteor.Error('not-authorized');
       }
       console.log("Setting uncheck");
-      Tasks.update({groupID: taskId}, { $set: { checked: setChecked } }, {multi: true});
+      Tasks.update({groupID: taskId}, { $set: { checked: setChecked, expiry: new Date() } }, {multi: true});
     },
     'tasks.setPrivate'(taskId, setToPrivate) {
       check(taskId, String);

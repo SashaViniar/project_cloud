@@ -117,7 +117,7 @@ const smartTokenize = functions => algorithm => {
 
 const TestTokenizer = smartTokenize(dummyFunctions);
 
-const CalcCore = (algorithm, input) => {
+const CalcCore = (algorithm, input, progressCallback) => {
   try{
     var output = [];
 
@@ -171,13 +171,14 @@ const CalcCore = (algorithm, input) => {
           }
           OS.push(OF.f(...args.reverse()));
         } else {
-          throw error("Unrecognized token in polish queue.")
+          throw error("Unrecognized token in polish queue. Possible cause: unmatched parenthesis.")
         }
         // console.log(OS.join(" "), "<-", x);
       });
 
       // console.log(OS.pop());
       inputManager.currentRow++;
+      if(progressCallback) progressCallback();
       
     });
     return {type: "result", value: output};
