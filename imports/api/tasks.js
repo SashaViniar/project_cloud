@@ -98,6 +98,31 @@ if (Meteor.isServer) {
       );
 
       return true;
+    },
+    'tasks.fail'(id) {
+      const task = Tasks.findOne({_id: id});
+      if(!task) throw new Meteor.Error('Incorrect task id');
+      if(task.failCount > 10) {
+        Tasks.update(
+          { _id: id },
+          {
+            $set: {
+              output: {type: "error", value: "Subtask failed. Took too long to compute."},
+              checked: true
+            }
+          }
+        );
+      } else {
+        Tasks.update(
+          { _id: id },
+          {
+            $inc: {
+              failCount: 1
+            }
+          }
+        );
+      }
+      return true;
     }
   })
  
@@ -129,7 +154,8 @@ if (Meteor.isServer) {
           checked: false,
           output: [],
           groupID: groupID._str,
-          expiry: new Date()
+          expiry: new Date(),
+          failCount: 0
         });
       });
     },
