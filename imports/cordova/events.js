@@ -82,6 +82,8 @@
     
 // };
 
+import worker from '../core/worker';
+const getInfo = chrome.system.cpu.getInfo;
 
 var timer;
 var plugin;
@@ -90,7 +92,7 @@ if(Meteor.isCordova)
 
 const onModeActivated = () => {
   var counter = 0;
-
+  let usage = 0;
   plugin.disableWebViewOptimizations();
 
   timer = setInterval(function () {
@@ -101,15 +103,31 @@ const onModeActivated = () => {
 
     // cordova.plugins.notification.badge.set(counter);
 
-    if (counter % 15 === 0) {
-      plugin.configure({
-        text: 'Running since ' + counter + ' sec'
+    
+      getInfo(cpuInfo => {
+        let sw = usage < 0.7;
+        usage = cpuInfo.processors.map(x=>x.usage.idle/x.usage.total).reduce((a,b)=>a+b)/cpuInfo.processors.length;
+        sw = sw ^ (usage<0.7);
+        if(sw) counter = 0;
+        if(usage < 0.7){
+          worker.start();
+          plugin.configure({
+            text: `Running since ${counter} sec, cpu: ${Math.round(usage*100)}%`
+          });
+        } else {
+          worker.pause();
+          plugin.configure({
+            text: `Idle since ${counter} sec, cpu: ${Math.round(usage*100)}%`
+          });
+        }
       });
 
       if (navigator.vibrate) {
         navigator.vibrate(300);
       }
-    }
+    
+
+
   }, 1000);
 }
 // Reset badge once deactivated
