@@ -9,7 +9,6 @@ import Reset from '../imports/ui/Reset.jsx';
 import Register from '../imports/ui/Register.jsx';
 import './main.html';
 import BackgroundEvents from '../imports/cordova/events.js';
-import { CalcCore } from '../imports/core/CalcCore';
 import worker from '../imports/core/worker';
 
 FlowRouter.route('/', {
