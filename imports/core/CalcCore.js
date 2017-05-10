@@ -117,7 +117,7 @@ const smartTokenize = functions => algorithm => {
 
 const TestTokenizer = smartTokenize(dummyFunctions);
 
-const CalcCore = (algorithm, input) => {
+const CalcCore = (algorithm, input, progressCallback) => {
   try{
     var output = [];
 
@@ -129,7 +129,16 @@ const CalcCore = (algorithm, input) => {
         else return input[inputManager.currentRow][i]}
     };
 
-    const functions = functionsGenerator(inputManager, output);
+    var outputManager = {
+      currentRow: -1,
+      next: () => {
+        outputManager.currentRow++;
+        output.push([]);
+      },
+      push: x=>output[outputManager.currentRow].push(x)
+    }
+
+    const functions = functionsGenerator(inputManager, outputManager);
     
     var OQ = smartTokenize(functions)(algorithm);
     var OS = [];
@@ -139,6 +148,7 @@ const CalcCore = (algorithm, input) => {
 
 
     input.forEach(()=>{
+      outputManager.next();
       // Reverse polish evaluation
       OQ.forEach(x => {
         if(x.type == "number") {
@@ -161,13 +171,15 @@ const CalcCore = (algorithm, input) => {
           }
           OS.push(OF.f(...args.reverse()));
         } else {
-          throw error("Unrecognized token in polish queue.")
+          throw error("Unrecognized token in polish queue. Possible cause: unmatched parenthesis.")
         }
         // console.log(OS.join(" "), "<-", x);
       });
 
       // console.log(OS.pop());
       inputManager.currentRow++;
+      if(progressCallback) progressCallback();
+      
     });
     return {type: "result", value: output};
   } catch (e) {
