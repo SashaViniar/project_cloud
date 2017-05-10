@@ -81,13 +81,13 @@
 //     // Update badge once mode gets activated
     
 // };
-
+if(Meteor.isCordova){
 import worker from '../core/worker';
 const getInfo = chrome.system.cpu.getInfo;
 
 var timer;
 var plugin;
-if(Meteor.isCordova)
+
   plugin = cordova.plugins.backgroundMode; 
 
 const onModeActivated = () => {
@@ -148,3 +148,4 @@ const onModeDisabled = () => {
 }
 
 export { onModeDisabled, onModeEnabled, onModeDeactivated, onModeActivated };
+}

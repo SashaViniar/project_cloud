@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { CalcCore } from './CalcCore';
+
 const taskHandler = (err,task) => {
   try {
     // console.log(task);
@@ -16,7 +19,7 @@ const taskHandler = (err,task) => {
           progress = 0;
         } else {
           clearInterval(innerTimer);
-          throw "Task too complex for me";
+          start();
         }
       };
       const innerTimer = setInterval(reporter, delta);
