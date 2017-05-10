@@ -8,23 +8,51 @@ class Creator extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     // Find the text field via the React ref
-    const algorithm = this.refs.algorithm.getInput();
-    const data = this.refs.data.getInput();
+    const algorithm = this.refs.algorithm.getInput().trim();
+    const data = this.refs.data
+                  .getInput()
+                  .trim()
+                  .split("\n")
+                  .map(x=>(x
+                    .match(/[\-\+]?\d+(\.\d+)?/g)||[])
+                    .map(x=>+x));
     const name = ReactDOM.findDOMNode(this.refs.name).value.trim();
     const description = ReactDOM.findDOMNode(this.refs.description).value.trim();
     // Validation
     var valid = true;
+
+    // Algorithm validation
     try{
       valid = valid && (TestTokenizer(algorithm).type != "error");
-      console.log("pass:");
-      console.log(TestTokenizer(algorithm).name);
     } catch(e) {
       valid = false;
-      alert("Please, check your input");
+      alert("Please, check your input: algorithm is incorrect");
       return;
     }
+
+    // Data validation
+    var indexes = [];
+    var inRX = /in\((\d+)\)/g;
+    var match = inRX.exec(algorithm);
+    while(match !== null) {
+        indexes.push(+match[1]);
+        // console.log("Pushed ", match[1]);
+        match = inRX.exec(algorithm);
+    }
+
+    // console.log(indexes, valid, TestTokenizer(algorithm));
+
+    if(indexes.length>0){
+      const maxIn = indexes.reduce((a,b)=>Math.max(a,b));
+      // console.log(indexes);
+      // console.log(data);
+      valid = valid && (data.filter(x=>x.length<maxIn+1).length == 0);
+      // console.log(valid);
+      // valid = false;// for debugging purposes
+    }
+    
     if(!valid){
-      alert("Please, check your input");
+      alert("Please, check your input: data validation went wrong");
       return;
     }
     // Insertion
