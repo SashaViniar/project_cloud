@@ -51,65 +51,18 @@ class Navbar extends React.Component {
           <div className="menu__wrap">
             <Menu name="main" items={[
               ["link", "Dashboard", home(this.props.go)],
-              ["link", "Create a new task", taskCreate(this.props.go)],
-              ["submenu", "Vegetables", "submenu-1"],
-              ["submenu", "Fruits", "submenu-2"],
-              ["submenu", "Grains", "submenu-3"],
-              ["submenu", "Mylk & Drinks", "submenu-4"],
+              ["submenu", "Actions", "submenu-1"],
+              ["link", "Settings"]
+              ["submenu", "Info", "submenu-2"],
               ["link", "Logout", logout],
-              Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle] : undefined,
             ]} />
             <Menu name="submenu-1" items={[
-              ["link", "Stalk Vegetables"],
-              ["link", "Roots & Seeds"],
-              ["link", "Cabbages"],
-              ["link", "Salad Greens"],
-              ["link", "Mushrooms"],
-              ["submenu", "Sale %", "submenu-1-1"]
-            ]} />
-            <Menu name="submenu-1-1" items={[
-              ["link", "Fair Trade Roots"],
-              ["link", "Dried Veggies"],
-              ["link", "Our Brand"],
-              ["link", "Homemade"]
+              ["link", "Create a new task", taskCreate(this.props.go)],
+              Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle] : undefined,
             ]} />
             <Menu name="submenu-2" items={[
-              ["link", "Citrus Fruits"],
-              ["link", "Berries"],
-              ["submenu", "Special Selection", "submenu-2-1"],
-              ["link", "Tropical Fruits"],
-              ["link", "Melons"]
-            ]} />
-            <Menu name="submenu-2-1" items={[
-              ["link", "Exotic Mixes"],
-              ["link", "Wild Pick"],
-              ["link", "Vitamin Boosters"]
-            ]} />
-            <Menu name="submenu-3" items={[
-              ["link", "Buckwheat"],
-              ["link", "Millet"],
-              ["link", "Quinoa"],
-              ["link", "Wild Rice"],
-              ["link", "Durum Wheat"],
-              ["submenu", "Promo Packs", "submenu-3-1"]
-            ]} />
-            <Menu name="submenu-3-1" items={[
-              ["link", "Starter Kit"],
-              ["link", "The Essential 8"],
-              ["link", "Bolivian Secrets"],
-              ["link", "Flour Packs"]
-            ]} />
-            <Menu name="submenu-4" items={[
-              ["link", "Grain Mylks"],
-              ["link", "Seed Mylks"],
-              ["link", "Nut Mylks"],
-              ["link", "Nutri Drinks"],
-              ["submenu", "Selection", "submenu-4-1"]
-            ]} />
-            <Menu name="submenu-4-1" items={[
-              ["link", "Nut Mylk Packs"],
-              ["link", "Amino Acid Heaven"],
-              ["link", "Allergy Free"]
+              ["link", "Help"],
+              ["link", "About"],
             ]} />
           </div>
         </nav>
