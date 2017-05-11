@@ -1,17 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import { check } from 'meteor/check';
+import { Settings } from './settings';
 
 export const Tasks = new Mongo.Collection('tasks');
 Ground.Collection(Tasks);
  
-const bigDataCount = 2; // minimum data size to split
-const delta = 1000*60*5; // milliseconds for task capture expiry
+// const bigDataCount = 2; // minimum data size to split
+// const delta = 1000*60*5; // milliseconds for task capture expiry
 
 const partitionArray = (array, size) => 
   array.map((e,i) => (i % size === 0) ? array.slice(i, i + size) : null)
        .filter(e=>e);
-
 
 if (Meteor.isServer) {
   // This code only runs on the server
@@ -80,7 +80,8 @@ if (Meteor.isServer) {
   Meteor.methods({
     'tasks.get'() {
       const task = Tasks.findOne({checked: false, expiry: {$lt: new Date()}}, {sort:{$natural:-1}});//TODO: priority,etc
-
+      const delta = Meteor.call('settings.server.get').expiryDelta;
+      // console.log(delta);
       if(task){
         Tasks.update({
           _id: task._id
@@ -157,6 +158,7 @@ if (Meteor.isServer) {
       }
       
       const groupID = new Meteor.Collection.ObjectID();
+      const bigDataCount = Meteor.call('settings.server.get').bigDataCount;
       const newData = partitionArray(task.data, bigDataCount);
       //TODO: do parallellism here by inserting several subtasks
       newData.forEach(chunk => {

@@ -3,7 +3,6 @@ import Navbar from './Navbar.jsx';
 import Content from './Content.jsx';
 import Creator from './Creator.jsx';
 import Classie from './tympanus/classie.js';
-import DummyData from './tympanus/dummydata.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
 
@@ -37,7 +36,6 @@ class App extends React.Component {
   componentDidMount(){
     Modernizr(window,document);
     Classie(window);
-    window.dummyData = DummyData;
     Main(window);
     var menuEl = document.getElementById('ml-menu'),
         mlmenu = new MLMenu(menuEl, {
@@ -56,18 +54,6 @@ class App extends React.Component {
       window.classie.remove(menuEl, 'menu--open');
     }
     
-    var gridWrapper = document.querySelector('.content');
-    
-    function loadDummyData(ev, itemName) {
-      ev.preventDefault();
-      closeMenu();
-      gridWrapper.innerHTML = '';
-      window.classie.add(gridWrapper, 'content--loading');
-      setTimeout(function() {
-        window.classie.remove(gridWrapper, 'content--loading');
-        gridWrapper.innerHTML = '<ul class="products">' + dummyData[itemName] + '<ul>';
-      }, 700);
-    }
   }
 
   render() {

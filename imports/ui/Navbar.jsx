@@ -3,13 +3,13 @@ import {logout} from '../api/accounts';
 
 const MenuItemLink = (props) => {
   return(
-    <li className="menu__item"><a className="menu__link" onClick={props.action} href="#">{props.caption}</a></li>
+    <li className="menu__item"><a id={props.id} className="menu__link" onClick={props.action} href="#">{props.caption}</a></li>
   );
 }
 
 const SubMenuLink = (props) => {
   return(
-    <li className="menu__item"><a className="menu__link" data-submenu={props.submenu} href="#">{props.caption}</a></li>
+    <li className="menu__item"><a id={props.id} className="menu__link" data-submenu={props.submenu} href="#">{props.caption}</a></li>
   );
 }
 
@@ -19,9 +19,9 @@ const Menu = (props) => {
       {
         props.items.filter(x=>x!==undefined).map((x,i)=>
           x[0]=="submenu"?
-            <SubMenuLink key={i} submenu={x[2]} caption={x[1]} />
+            <SubMenuLink key={i} submenu={x[2]} caption={x[1]} id={x[3]} />
           :
-            <MenuItemLink key={i} caption={x[1]} action={x[2]} />
+            <MenuItemLink key={i} caption={x[1]} action={x[2]} id={x[3]} />
         )
       }
     </ul>
@@ -43,6 +43,8 @@ const cordovaToggle = () => {
   }
 }
 
+const nop = () => {};//TODO: Remove me
+
 class Navbar extends React.Component {
   render(){
   	return(
@@ -50,66 +52,19 @@ class Navbar extends React.Component {
           <button className="action action--close" aria-label="Close Menu"><span className="icon icon--cross"></span></button>
           <div className="menu__wrap">
             <Menu name="main" items={[
-              ["link", "Dashboard", home(this.props.go)],
-              ["link", "Create a new task", taskCreate(this.props.go)],
-              ["submenu", "Vegetables", "submenu-1"],
-              ["submenu", "Fruits", "submenu-2"],
-              ["submenu", "Grains", "submenu-3"],
-              ["submenu", "Mylk & Drinks", "submenu-4"],
-              ["link", "Logout", logout],
-              Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle] : undefined,
+              ["link", "Dashboard", home(this.props.go), "dashboard"],
+              ["submenu", "Actions", "submenu-1", "actions"],
+              ["link", "Settings", nop, "settings"],
+              ["submenu", "Info", "submenu-2", "info"],
+              ["link", "Logout", logout, "logout"],
             ]} />
             <Menu name="submenu-1" items={[
-              ["link", "Stalk Vegetables"],
-              ["link", "Roots & Seeds"],
-              ["link", "Cabbages"],
-              ["link", "Salad Greens"],
-              ["link", "Mushrooms"],
-              ["submenu", "Sale %", "submenu-1-1"]
-            ]} />
-            <Menu name="submenu-1-1" items={[
-              ["link", "Fair Trade Roots"],
-              ["link", "Dried Veggies"],
-              ["link", "Our Brand"],
-              ["link", "Homemade"]
+              ["link", "Create a new task", taskCreate(this.props.go), "create"],
+              Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle, "toggle"] : undefined,
             ]} />
             <Menu name="submenu-2" items={[
-              ["link", "Citrus Fruits"],
-              ["link", "Berries"],
-              ["submenu", "Special Selection", "submenu-2-1"],
-              ["link", "Tropical Fruits"],
-              ["link", "Melons"]
-            ]} />
-            <Menu name="submenu-2-1" items={[
-              ["link", "Exotic Mixes"],
-              ["link", "Wild Pick"],
-              ["link", "Vitamin Boosters"]
-            ]} />
-            <Menu name="submenu-3" items={[
-              ["link", "Buckwheat"],
-              ["link", "Millet"],
-              ["link", "Quinoa"],
-              ["link", "Wild Rice"],
-              ["link", "Durum Wheat"],
-              ["submenu", "Promo Packs", "submenu-3-1"]
-            ]} />
-            <Menu name="submenu-3-1" items={[
-              ["link", "Starter Kit"],
-              ["link", "The Essential 8"],
-              ["link", "Bolivian Secrets"],
-              ["link", "Flour Packs"]
-            ]} />
-            <Menu name="submenu-4" items={[
-              ["link", "Grain Mylks"],
-              ["link", "Seed Mylks"],
-              ["link", "Nut Mylks"],
-              ["link", "Nutri Drinks"],
-              ["submenu", "Selection", "submenu-4-1"]
-            ]} />
-            <Menu name="submenu-4-1" items={[
-              ["link", "Nut Mylk Packs"],
-              ["link", "Amino Acid Heaven"],
-              ["link", "Allergy Free"]
+              ["link", "Help", nop, "help"],
+              ["link", "About", nop, "about"],
             ]} />
           </div>
         </nav>
