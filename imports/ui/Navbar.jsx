@@ -43,6 +43,8 @@ const cordovaToggle = () => {
   }
 }
 
+const nop = () => {};
+
 class Navbar extends React.Component {
   render(){
   	return(
@@ -52,7 +54,7 @@ class Navbar extends React.Component {
             <Menu name="main" items={[
               ["link", "Dashboard", home(this.props.go)],
               ["submenu", "Actions", "submenu-1"],
-              ["link", "Settings"]
+              ["link", "Settings", nop],
               ["submenu", "Info", "submenu-2"],
               ["link", "Logout", logout],
             ]} />
@@ -61,8 +63,8 @@ class Navbar extends React.Component {
               Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle] : undefined,
             ]} />
             <Menu name="submenu-2" items={[
-              ["link", "Help"],
-              ["link", "About"],
+              ["link", "Help", nop],
+              ["link", "About", nop],
             ]} />
           </div>
         </nav>
