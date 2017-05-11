@@ -3,13 +3,13 @@ import {logout} from '../api/accounts';
 
 const MenuItemLink = (props) => {
   return(
-    <li className="menu__item"><a className="menu__link" onClick={props.action} href="#">{props.caption}</a></li>
+    <li className="menu__item"><a id={props.id} className="menu__link" onClick={props.action} href="#">{props.caption}</a></li>
   );
 }
 
 const SubMenuLink = (props) => {
   return(
-    <li className="menu__item"><a className="menu__link" data-submenu={props.submenu} href="#">{props.caption}</a></li>
+    <li className="menu__item"><a id={props.id} className="menu__link" data-submenu={props.submenu} href="#">{props.caption}</a></li>
   );
 }
 
@@ -19,9 +19,9 @@ const Menu = (props) => {
       {
         props.items.filter(x=>x!==undefined).map((x,i)=>
           x[0]=="submenu"?
-            <SubMenuLink key={i} submenu={x[2]} caption={x[1]} />
+            <SubMenuLink key={i} submenu={x[2]} caption={x[1]} id={x[3]} />
           :
-            <MenuItemLink key={i} caption={x[1]} action={x[2]} />
+            <MenuItemLink key={i} caption={x[1]} action={x[2]} id={x[3]} />
         )
       }
     </ul>
@@ -43,7 +43,7 @@ const cordovaToggle = () => {
   }
 }
 
-const nop = () => {};
+const nop = () => {};//TODO: Remove me
 
 class Navbar extends React.Component {
   render(){
@@ -52,19 +52,19 @@ class Navbar extends React.Component {
           <button className="action action--close" aria-label="Close Menu"><span className="icon icon--cross"></span></button>
           <div className="menu__wrap">
             <Menu name="main" items={[
-              ["link", "Dashboard", home(this.props.go)],
-              ["submenu", "Actions", "submenu-1"],
-              ["link", "Settings", nop],
-              ["submenu", "Info", "submenu-2"],
-              ["link", "Logout", logout],
+              ["link", "Dashboard", home(this.props.go), "dashboard"],
+              ["submenu", "Actions", "submenu-1", "actions"],
+              ["link", "Settings", nop, "settings"],
+              ["submenu", "Info", "submenu-2", "info"],
+              ["link", "Logout", logout, "logout"],
             ]} />
             <Menu name="submenu-1" items={[
-              ["link", "Create a new task", taskCreate(this.props.go)],
-              Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle] : undefined,
+              ["link", "Create a new task", taskCreate(this.props.go), "create"],
+              Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle, "toggle"] : undefined,
             ]} />
             <Menu name="submenu-2" items={[
-              ["link", "Help", nop],
-              ["link", "About", nop],
+              ["link", "Help", nop, "help"],
+              ["link", "About", nop, "about"],
             ]} />
           </div>
         </nav>

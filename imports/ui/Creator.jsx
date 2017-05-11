@@ -57,7 +57,9 @@ class Creator extends React.Component {
     }
     // Insertion
     Meteor.call('tasks.insert', {algorithm, data, name, description});
-    this.props.go("content");
+    $(".menu__breadcrumbs").children()[0].click();
+    $("#dashboard")[0].click();
+    // this.props.go("content");
   }
   render(){
     return(
