@@ -29,62 +29,59 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
-           <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"5%"}}>      
-         <div className="navbar navbar-inverse">
-      <div className="col-md-12">
-        <div className="col-md-6">
-          <h4>Task {this.props.task.name} created by {this.props.task.username} </h4>
+           <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"5%"}}>    
+
+
+          <div class="task">
+      <div>
+        <div class="row" style="color:white">
+
+          <div class="col-md-6" style="float:left;">
+            <div>Task {this.props.task.name} created by {this.props.task.username}</div>
+          </div>
+          <div class="col-md-6">
+            <button class="btn btn-primary" style="float:right;">Description</button>
+            <button class="btn btn-danger" style="float:right;">Delete</button>
+          </div>
+
+
         </div>
-        <div className="col-md-4">
-          { this.props.showPrivateButton ? (
-          <button className="toggle-private btn btn-primary" onClick={this.togglePrivate.bind(this)}>
-            { this.props.task.private ? 'Private' : 'Public' }
-            
-          </button>
-        ) : ''}
+        <div class="row text-center">
+          <p>Task name</p>
         </div>
-        <div className="col-md-2">
-          <h2><button className = "btn btn-primary" style ={{float:"right"}}>S</button><button className = "btn btn-primary" style ={{float:"right"}}  onClick={this.deleteThisTask.bind(this)}>X</button></h2>
+        <div class="row text-center">
+          <p>Description</p>
         </div>
-        
-      </div>
-      
-      
-      <div className="col-md-12">
-          <h2 className="tascname">This is Task Name</h2>
-      </div>
-      <div className="col-md-12">
-        <div>
-          <h2 className = "taskdescr">This is Task Description</h2>
-          
-          <div className="thisdesc" >
-              {this.props.task.description}  
+        <div class="col-md-12">
+          <div class="col-md-4">
+            <div class="row text-center">
+              Algorithm
+            </div>
+            <div class="border-block">
+                <pre>{this.props.task.algorithm}</pre>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row text-center">
+              Date
+            </div>
+            <div class="border-block">
+              <pre>{this.props.task.data}</pre>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="row text-center">
+              Output
+            </div>
+            <div class="border-block" onClick = {this.toggleChecked.bind(this)}>
+              <pre>{this.props.task.output}</pre>
+            </div>
           </div>
         </div>
       </div>
-      <div className="col-md-12">
-        <div className="col-md-4">
-          <h4 className="taskdescr">ALGORITHM</h4>
-          <div className = "stylebro thisdesc">
-            <pre>{this.props.task.algorithm}</pre>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <h4 className="taskdescr">DATA</h4>
-          <div className = "stylebro thisdesc">
-            <pre>{this.props.task.data}</pre>
-          </div>
-        </div>
-        <div className="col-md-4">
-          <h4 className="taskdescr">OUTPUT</h4>
-          <div className = "stylebro thisdesc" onClick = {this.toggleChecked.bind(this)}>
-            <pre>{this.props.task.output}</pre>
-              
-          </div>
-        </div>
-      </div>
-      
     </div>
+
+
     </li>
           
        
