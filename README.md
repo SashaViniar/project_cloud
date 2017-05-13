@@ -1,6 +1,6 @@
 # The ultimate cloud computing app
 
-#### Now hosted at [Heroku](diploma-project-cloud.herokuapp.com)
+#### Now hosted at [Heroku](http://diploma-project-cloud.herokuapp.com)
 
 Install prerequisites: **meteor npm install**
 
