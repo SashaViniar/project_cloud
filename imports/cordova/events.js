@@ -10,7 +10,8 @@ const onModeActivated = () => {
   var counter = 0;
   let usage = 0;
   plugin.disableWebViewOptimizations();
-
+  console.log(typeof window.addEventListener);
+  window.addEventListener("batterylow",(s)=>clearInterval(timer),false);
   timer = setInterval(function () {
     counter++;
 

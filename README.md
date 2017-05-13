@@ -1,10 +1,12 @@
 # The ultimate cloud computing app
 
+#### Now hosted at [Heroku](diploma-project-cloud.herokuapp.com)
+
 Install prerequisites: **meteor npm install**
 
 Run: **meteor**
 
-Build for android, etc: **meteor build ../project_cloud_build --server 127.0.0.1:3000**
+Build for android, etc: **meteor build ../project_cloud_build --server diploma-project-cloud.herokuapp.com**
 
 Test: **meteor test --driver-package practicalmeteor:mocha**
 
