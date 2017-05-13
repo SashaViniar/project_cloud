@@ -32,48 +32,49 @@ export default class Task extends Component {
            <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"5%"}}>    
 
 
-          <div class="task">
+          <div className="task">
       <div>
-        <div class="row" style="color:white">
+        <div className="row" style="color:white">
 
-          <div class="col-md-6" style="float:left;">
+          <div className="col-md-6" style="float:left;">
             <div>Task {this.props.task.name} created by {this.props.task.username}</div>
           </div>
-          <div class="col-md-6">
-            <button class="btn btn-primary" style="float:right;">Description</button>
-            <button class="btn btn-danger" style="float:right;">Delete</button>
+          <div className="col-md-6">
+            <button className="btn btn-primary" style={{float:"right"}}>Description</button>
+            <button className="btn btn-danger" style={{float:"left"}}>Delete</button>
+            <button className="btn btn-succses" style={{float:"left"}}>Delete</button>
           </div>
 
 
         </div>
-        <div class="row text-center">
+        <div className="row text-center">
           <p>Task name</p>
         </div>
-        <div class="row text-center">
+        <div className="row text-center">
           <p>Description</p>
         </div>
-        <div class="col-md-12">
-          <div class="col-md-4">
-            <div class="row text-center">
+        <div className="col-md-12">
+          <div className="col-md-4">
+            <div className="row text-center">
               Algorithm
             </div>
-            <div class="border-block">
+            <div className="border-block">
                 <pre>{this.props.task.algorithm}</pre>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="row text-center">
+          <div className="col-md-4">
+            <div className="row text-center">
               Date
             </div>
-            <div class="border-block">
+            <div className="border-block">
               <pre>{this.props.task.data}</pre>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="row text-center">
+          <div className="col-md-4">
+            <div className="row text-center">
               Output
             </div>
-            <div class="border-block" onClick = {this.toggleChecked.bind(this)}>
+            <div className="border-block" onClick = {this.toggleChecked.bind(this)}>
               <pre>{this.props.task.output}</pre>
             </div>
           </div>
@@ -96,3 +97,12 @@ Task.propTypes = {
     task: PropTypes.object.isRequired,
     showPrivateButton: React.PropTypes.bool.isRequired,
 };
+
+  $(document).on('click', '.btn-primary', function() {
+      
+
+      console.log(parent);
+      $(this).parents('.task').find('.col-md-12').toggle();
+      
+
+    });

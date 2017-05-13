@@ -25,6 +25,15 @@
 .dashed-border {
   border: 3px dashed #005f88;
 }
+  .task {
+      
+      height: 100%;
+    }
+    
+    .border-block {
+      border: 1px solid green;
+      min-height: 250px;
+    }
 
 /*.blur:before{
   -webkit-filter: blur(3px);
