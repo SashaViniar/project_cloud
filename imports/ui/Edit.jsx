@@ -21,9 +21,16 @@ export default class Edit extends Component {
         // Give tasks a different className when they are checked off,
         // so that we can style them nicely in CSS
 
-          
-       
+          return{
+          	<div className="edit border-block">
+		<div className="col-md-6 edit-name-task">
+			<input id = "task-name" type="text" name=""/>
+		</div>
+		<div className="col-md-6 edit-description-task">
+			<input type="textarea" id = "tasl-desck" name=""/>
+		</div>
+	</div>
+          }
 
-        );
     }
 }
