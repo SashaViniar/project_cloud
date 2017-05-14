@@ -21,18 +21,17 @@ export default class Settings extends Component {
         // Give tasks a different className when they are checked off,
         // so that we can style them nicely in CSS
 
-          return{
-          	<div className="setting">
-		<div className="col-md-12">
-			<form>
-				<label for="pass">Change password</label>
-				<input type="password" name="pass"/>
-				<input type="password" name="pass"/>
-				<input type="submit" value="Submit"/>
-			</form>
-		</div>
-	</div>
-          }
-
+          return(
+          	<div className={this.props.className}>
+        		<div className="col-md-12">
+        			<form>
+        				<label for="pass">Change password</label>
+        				<input type="password" name="pass"/>
+        				<input type="password" name="pass"/>
+        				<input type="submit" value="Submit"/>
+        			</form>
+        		</div>
+        	</div>
+          );
     }
 }

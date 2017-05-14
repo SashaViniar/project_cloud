@@ -3,6 +3,7 @@ import Navbar from './Navbar.jsx';
 import Content from './Content.jsx';
 import Creator from './Creator.jsx';
 import Edit from './Edit.jsx';
+import Settings from './Settings.jsx';
 import Classie from './tympanus/classie.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
