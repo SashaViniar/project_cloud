@@ -58,7 +58,7 @@ class Navbar extends React.Component {
             <Menu name="main" items={[
               ["link", "Dashboard", home(this.props.go), "dashboard"],
               ["submenu", "Actions", "submenu-1", "actions"],
-              ["link", "Settings", nop, "settings"],
+              ["link", "Settings", settings, "settings"],
               ["submenu", "Info", "submenu-2", "info"],
               ["link", "Logout", logout, "logout"],
             ]} />
