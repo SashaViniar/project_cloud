@@ -13,26 +13,38 @@ class Edit extends React.Component {
           <h1>Create a new task:</h1>
         </header>
         <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+
           <div className="col-md-12">
-            <label htmlFor="name" className="col-md-2 col-xs-6">Task name:&nbsp;&nbsp;</label>
-            <input
-              className="col-md-3 col-xs-6"
+            <div className="col-md-3">
+              <label htmlFor="name" className="">Task name:&nbsp;&nbsp;</label>
+            </div>
+            <div className="col-md-6">
+              <input
+              className="form-control"
               type="text"
               ref="name"
               name="name"
               placeholder="Type task name here"/>
+            </div>
+
+            
           </div>
-          <div className="col-md-12">
-            <label htmlFor="description" className="col-md-2 col-xs-6">Task description:&nbsp;&nbsp;</label>
-            <textarea
-              className="col-md-5 col-xs-6 description-area"
+          <div className="col-md-12" style = {{"margin-top":"20px"}}>
+          <div className="col-md-3">
+            <label htmlFor="description" className="">Task description:&nbsp;&nbsp;</label>
+          </div>
+            <div className="col-md-6">
+              <textarea
+              className="form-control description-area"
               type="text"
               ref="description"
               name="description"
               placeholder="Type task description here"/>
+            </div>
+            
           </div>
-          <div className="col-md-12 centr">
-            <button>Submit task</button>
+          <div className="col-md-12 centr"  style = {{"margin-top":"20px"}}>
+            <button className="btn btn-info">Submit task</button>
           </div>
         </form>
       </div>
