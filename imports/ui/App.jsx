@@ -9,7 +9,7 @@ import Modernizr from './tympanus/modernizr-custom.js';
 
 const appState = (name,id) => (props, state) => ({show: name, id: id});
 
-const states = ["content", "creator", "edit"];
+const states = ["content", "creator", "edit", "settings"];
 
 // App component - represents the whole app
 class App extends React.Component {
@@ -33,6 +33,8 @@ class App extends React.Component {
         return (<Creator className="content" go={this.go.bind(this)} />);
       case "edit":
         return (<Edit className="content" go={this.go.bind(this)} id={this.state.id} />);
+      case "settings":
+        return (<Settings className="content" go={this.go.bind(this)} />);
     }
   }
 
