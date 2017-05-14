@@ -6,7 +6,7 @@ import Classie from './tympanus/classie.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
 
-const appState = name => (props, state) => ({show: name});
+const appState = (name,id) => (props, state) => ({show: name, id: id});
 
 const states = ["content", "creator"];
 
@@ -17,9 +17,9 @@ class App extends React.Component {
     this.state = {show: "content"};
   }
 
-  go(name){
+  go(name, id){
     if(states.includes(name))
-      this.setState(appState(name));
+      this.setState(appState(name, id));
     var menuEl = document.getElementById('ml-menu');
     window.classie.remove(menuEl, 'menu--open');
   }
@@ -27,9 +27,11 @@ class App extends React.Component {
   getContent(){
     switch(this.state.show){
       case "content":
-        return (<Content className="content" />);
+        return (<Content className="content" go={this.go.bind(this)} />);
       case "creator":
         return (<Creator className="content" go={this.go.bind(this)} />);
+      case "edit":
+        return (<Edit className="content" go={this.go.bind(this)} id={this.state.id} />);
     }
   }
 

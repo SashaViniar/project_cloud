@@ -43,7 +43,7 @@ export default class Task extends Component {
             <button className="btn btn-primary" style={{float:"right"}}>Description</button>
             <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
             <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
-            <button className="btn btn-info" style={{float:"right"}}>Edit</button>
+            <button className="btn btn-info" style={{float:"right"}} onClick = {()=>this.props.go("edit", this.props.task.id)}>Edit</button>
           </div>
 
 
