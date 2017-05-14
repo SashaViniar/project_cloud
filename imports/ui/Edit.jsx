@@ -1,46 +1,45 @@
-import React, {
-  Component,
-  PropTypes
-}
-from 'react';
-import {
-  Tasks
-}
-from '../api/tasks.js';
-import {
-  Meteor
-}
-from 'meteor/meteor';
-import classnames from 'classnames';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Meteor } from 'meteor/meteor';
 
-
-// Task component - represents a single todo item
-export default class Edit extends Component {
-  toggleChecked() {
-    // Set the checked property to the opposite of its current value    
-    Meteor.call('tasks.setChecked', this.props.task._id, !this.props.task.checked);
-  }
-
-  deleteThisTask() {
-    Meteor.call('tasks.remove', this.props.task._id);
-  }
-  togglePrivate() {
-    Meteor.call('tasks.setPrivate', this.props.task._id, !this.props.task.private);
-  }
-  render() {
-    // Give tasks a different className when they are checked off,
-    // so that we can style them nicely in CSS
-
-    return {
-      <div className="edit border-block">
-        <div className="col-md-6 edit-name-task">
-            <input id = "task-name" type="text" name=""/>
-        </div>
-        <div className="col-md-6 edit-description-task">
-            <input type="textarea" id = "tasl-desck" name=""/>
-        </div>
-    </div>
-    }
-
+class Creator extends React.Component {
+  render(){
+    return(
+      <div className={this.props.className}>
+        <header>
+          <h1>Create a new task:</h1>
+        </header>
+        <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
+          <div className="col-md-12">
+            <label htmlFor="name" className="col-md-2 col-xs-6">Task name:&nbsp;&nbsp;</label>
+            <input
+              className="col-md-3 col-xs-6"
+              type="text"
+              ref="name"
+              name="name"
+              placeholder="Type task name here"/>
+          </div>
+          <div className="col-md-12">
+            <label htmlFor="description" className="col-md-2 col-xs-6">Task description:&nbsp;&nbsp;</label>
+            <textarea
+              className="col-md-5 col-xs-6 description-area"
+              type="text"
+              ref="description"
+              name="description"
+              placeholder="Type task description here"/>
+          </div>
+          <div className="col-md-12 centr">
+            <button>Submit task</button>
+          </div>
+        </form>
+      </div>
+    );
   }
 }
+
+export default Creator;
+
+//TODO: Implement dragover animations
+
+
+
