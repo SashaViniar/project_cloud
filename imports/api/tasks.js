@@ -212,5 +212,9 @@ if (Meteor.isServer) {
    
       Tasks.update({groupID: taskId}, { $set: { private: setToPrivate } }, {multi: true});
     },
+    'tasks.updateBatch'(id, newProps){
+      check(newProps, Object);
+      Tasks.update({groupID: id}, { $set: { name: newProps.name, description: newProps.description}}, {multi: true});
+    }
   });
 }
