@@ -25,6 +25,28 @@
 .dashed-border {
   border: 3px dashed #005f88;
 }
+  .task {
+      
+      height: 100%;
+    }
+    
+    .border-block {
+      border: 1px solid #5c5edc;
+      min-height: 250px;
+    }
+
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+      border-color: #5c5edc !important;
+      border: 1px solid;
+
+    }
+
+    .table tr{
+        border-color: #5c5edc !important;       
+    }
+    .table{
+      margin-bottom: 0px !important;
+    }
 
 /*.blur:before{
   -webkit-filter: blur(3px);
@@ -66,6 +88,10 @@
     display: flex; 
     align-items:center;
   }
+}
+
+.icon--menu{
+  color:#5c5edc;;
 }
 
 .m0{
@@ -164,7 +190,12 @@
 }
 
 pre{
-      border: transparent !important;
+    border: transparent !important;
     background: transparent !important;
     color: #ccc !important;
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }

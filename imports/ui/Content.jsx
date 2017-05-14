@@ -37,6 +37,7 @@ class Content extends React.Component {
               key={task._id}
               task={task}
               showPrivateButton={showPrivateButton}
+              go={this.props.go}
             />
           );
     });

@@ -43,6 +43,10 @@ const cordovaToggle = () => {
   }
 }
 
+const settings = go => () => {
+  go("settings");
+}
+
 const help = go => () => {
   go("help");
 }
@@ -62,7 +66,7 @@ class Navbar extends React.Component {
             <Menu name="main" items={[
               ["link", "Dashboard", home(this.props.go), "dashboard"],
               ["submenu", "Actions", "submenu-1", "actions"],
-              ["link", "Settings", nop, "settings"],
+              ["link", "Settings", settings(this.props.go), "settings"],
               ["submenu", "Info", "submenu-2", "info"],
               ["link", "Logout", logout, "logout"],
             ]} />

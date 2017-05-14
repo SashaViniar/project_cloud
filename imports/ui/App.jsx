@@ -2,13 +2,15 @@ import React from 'react';
 import Navbar from './Navbar.jsx';
 import Content from './Content.jsx';
 import Creator from './Creator.jsx';
+import Edit from './Edit.jsx';
+import Settings from './Settings.jsx';
 import Classie from './tympanus/classie.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
 
-const appState = name => (props, state) => ({show: name});
+const appState = (name,id) => (props, state) => ({show: name, id: id});
 
-const states = ["content", "creator"];
+const states = ["content", "creator", "edit", "settings"];
 
 // App component - represents the whole app
 class App extends React.Component {
@@ -17,9 +19,9 @@ class App extends React.Component {
     this.state = {show: "content"};
   }
 
-  go(name){
+  go(name, id){
     if(states.includes(name))
-      this.setState(appState(name));
+      this.setState(appState(name, id));
     var menuEl = document.getElementById('ml-menu');
     window.classie.remove(menuEl, 'menu--open');
   }
@@ -27,9 +29,13 @@ class App extends React.Component {
   getContent(){
     switch(this.state.show){
       case "content":
-        return (<Content className="content" />);
+        return (<Content className="content" go={this.go.bind(this)} />);
       case "creator":
         return (<Creator className="content" go={this.go.bind(this)} />);
+      case "edit":
+        return (<Edit className="content" go={this.go.bind(this)} id={this.state.id} />);
+      case "settings":
+        return (<Settings className="content" go={this.go.bind(this)} />);
     }
   }
 
