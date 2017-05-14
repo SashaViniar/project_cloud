@@ -39,7 +39,3 @@ class Creator extends React.Component {
 
 export default Creator;
 
-//TODO: Implement dragover animations
-
-
-
