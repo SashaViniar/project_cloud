@@ -10,7 +10,7 @@ import Classie from './tympanus/classie.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
 
-const appState = (name,id) => (props, state) => ({show: name, id: id});
+const appState = (name,id) => (state, props) => ({show: name, id: id});
 
 const states = ["content", "creator", "edit", "settings", "help", "about"];
 
