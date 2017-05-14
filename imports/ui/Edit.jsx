@@ -10,7 +10,7 @@ class Edit extends React.Component {
     return(
       <div className={this.props.className}>
         <header>
-          <h1>Create a new task:</h1>
+          <h1>Edit task:</h1>
         </header>
         <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
 
