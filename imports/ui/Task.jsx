@@ -34,15 +34,15 @@ export default class Task extends Component {
 
           <div className="task">
       <div>
-        <div className="row" style="color:white">
+        <div className="row" style={{color:"white"}}> 
 
-          <div className="col-md-6" style="float:left;">
+          <div className="col-md-6" style={{float:"left"}}>
             <div>Task {this.props.task.name} created by {this.props.task.username}</div>
           </div>
           <div className="col-md-6">
             <button className="btn btn-primary" style={{float:"right"}}>Description</button>
-            <button className="btn btn-danger" style={{float:"left"}}>Delete</button>
-            <button className="btn btn-succses" style={{float:"left"}}>Delete</button>
+            <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
+            <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
           </div>
 
 
@@ -99,10 +99,5 @@ Task.propTypes = {
 };
 
   $(document).on('click', '.btn-primary', function() {
-      
-
-      console.log(parent);
       $(this).parents('.task').find('.col-md-12').toggle();
-      
-
     });
