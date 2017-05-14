@@ -16,7 +16,9 @@ class About extends React.Component {
         			 <img  width = "100%" src="mnxoid.jpg" alt=""/>
         		</div>
         		<div className="row">
-        			<div className="text-with-description"></div>
+        			<div className="text-with-description">
+        				
+        			</div>
         		</div>
         		<div className="row">
         			<div className="link-social"></div>
@@ -27,7 +29,9 @@ class About extends React.Component {
         			<img  width = "100%" src="lilia.jpg" alt=""/>
         		</div>
         		<div className="row">
-        			<div className="text-with-description"></div>
+        			<div className="text-with-description">
+        				MATYASHCHUK LILIYA
+        			</div>
         		</div>
         		<div className="row">
         			<div className="link-social"></div>
@@ -36,7 +40,7 @@ class About extends React.Component {
         	<div className="col-md-4">
         		<img  width = "100%" src="sasha.jpg" alt=""/>
         		<div className="row">
-        			<div className="text-with-description"></div>
+        			<div className="text-with-description">VINIAR OLEKSANDR</div>
         		</div>
         		<div className="row">
         			<div className="link-social"></div>
