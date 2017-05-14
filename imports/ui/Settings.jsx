@@ -24,11 +24,61 @@ export default class Settings extends Component {
           return(
           	<div className={this.props.className}>
         		<div className="col-md-12">
+                 <header>
+                    <h1>Setting</h1>
+                </header>
         			<form>
-        				<label for="pass">Change password</label>
-        				<input type="password" name="pass"/>
-        				<input type="password" name="pass"/>
-        				<input type="submit" value="Submit"/>
+                        <div className="col-md-12" style = {{"margin-top":"20px"}}>
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <label style = {{"margin":"0 auto","font-size":"18px"}} htmlFor="">Interval between task requests (ms):</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <input type="number" min="0" className = "form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12" style = {{"margin-top":"20px"}}>
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <label style = {{"margin":"0 auto","font-size":"18px"}} htmlFor="">High CPU load level:%</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <input type="number" min="0" max = "100" className = "form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12" style = {{"margin-top":"20px"}}>
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <label style = {{"margin":"0 auto","font-size":"18px"}} htmlFor="">Data split level:</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <input type="number" min="0" className = "form-control"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-md-12" style = {{"margin-top":"20px"}}>
+                            <div className="row">
+                                <div className="col-md-4">
+                                    <label style = {{"margin":"0 auto","font-size":"18px"}} htmlFor="">Expiry time (ms):</label>
+                                </div>
+                                <div className="col-md-8">
+                                    <input type="number" min="0"  className = "form-control"/>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className="col-md-12" style = {{"margin-top":"30px"}}>
+                            <div className="row">
+                                <div className="text-center">
+                                    <input type="submit" className = "btn btn-info" value="Save"/>
+                                </div>
+                            </div>
+                        </div>
+
+        				
         			</form>
         		</div>
         	</div>
