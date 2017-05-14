@@ -43,6 +43,7 @@ export default class Task extends Component {
             <button className="btn btn-primary" style={{float:"right"}}>Description</button>
             <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
             <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
+            <button className="btn btn-info" style={{float:"right"}}>Edit</button>
           </div>
 
 
@@ -54,7 +55,7 @@ export default class Task extends Component {
           <p>Description</p>
         </div>
         <div className="col-md-12">
-          <div className="col-md-4">
+          <div className="col-md-6">
             <div className="row text-center">
               Algorithm
             </div>
@@ -62,7 +63,7 @@ export default class Task extends Component {
                 <pre>{this.props.task.algorithm}</pre>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-6">
             <div className="row text-center">
               Date
             </div>
@@ -70,7 +71,7 @@ export default class Task extends Component {
               <pre>{this.props.task.data}</pre>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-12">
             <div className="row text-center">
               Output
             </div>
