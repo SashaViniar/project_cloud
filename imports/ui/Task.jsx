@@ -48,11 +48,10 @@ export default class Task extends Component {
 
 
         </div>
-        <div className="row text-center">
-          <p>Task name</p>
-        </div>
-        <div className="row text-center">
-          <p>Description</p>
+        <div className="row col-md-12" >
+          <div className = "col-md-1"></div>
+          <p className = "row text-justify col-md-10">{this.props.task.description}</p>
+          <div className = "col-md-1"></div>
         </div>
         <div className="col-md-12">
           <div className="col-md-6">

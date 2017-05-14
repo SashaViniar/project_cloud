@@ -32,7 +32,7 @@ export default class Edit extends Component {
     // so that we can style them nicely in CSS
 
     return {
-      <div className="edit border-block">
+      <div className="navbar navbar-inverse edit border-block">
         <div className="col-md-6 edit-name-task">
             <input id = "task-name" type="text" name=""/>
         </div>
