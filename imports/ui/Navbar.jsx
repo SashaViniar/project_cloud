@@ -43,6 +43,10 @@ const cordovaToggle = () => {
   }
 }
 
+const settings = go => () => {
+  go("settings");
+}
+
 const nop = () => {};//TODO: Remove me
 
 class Navbar extends React.Component {
