@@ -47,6 +47,14 @@ const settings = go => () => {
   go("settings");
 }
 
+const help = go => () => {
+  go("help");
+}
+
+const about = go => () => {
+  go("about");
+}
+
 const nop = () => {};//TODO: Remove me
 
 class Navbar extends React.Component {
@@ -67,8 +75,8 @@ class Navbar extends React.Component {
               Meteor.isCordova ? ["link", "Toggle availability", cordovaToggle, "toggle"] : undefined,
             ]} />
             <Menu name="submenu-2" items={[
-              ["link", "Help", nop, "help"],
-              ["link", "About", nop, "about"],
+              ["link", "Help", help(this.props.go), "help"],
+              ["link", "About", about(this.props.go), "about"],
             ]} />
           </div>
         </nav>
