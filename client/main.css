@@ -45,7 +45,7 @@
         border-color: #5c5edc !important;       
     }
     .table{
-      margin-bottom: 0px;
+      margin-bottom: 0px !important;
     }
 
 /*.blur:before{

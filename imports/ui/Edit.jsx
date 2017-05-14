@@ -2,7 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 
-class Creator extends React.Component {
+class Edit extends React.Component {
+  handleSubmit(){
+    alert("not implemented yet");
+  }
   render(){
     return(
       <div className={this.props.className}>
@@ -37,5 +40,5 @@ class Creator extends React.Component {
   }
 }
 
-export default Creator;
+export default Edit;
 

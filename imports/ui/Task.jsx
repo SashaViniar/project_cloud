@@ -20,6 +20,9 @@ export default class Task extends Component {
     togglePrivate() {
         Meteor.call('tasks.setPrivate', this.props.task._id, !this.props.task.private);
     }
+    edit() {
+      this.props.go("edit", this.props.task.id);
+    }
     render() {
         // Give tasks a different className when they are checked off,
         // so that we can style them nicely in CSS
@@ -43,7 +46,7 @@ export default class Task extends Component {
             <button className="btn btn-primary" style={{float:"right"}}>Description</button>
             <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
             <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
-            <button className="btn btn-info" style={{float:"right"}} onClick = {()=>this.props.go("edit", this.props.task.id)}>Edit</button>
+            <button className="btn btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
           </div>
 
 

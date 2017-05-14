@@ -2,13 +2,14 @@ import React from 'react';
 import Navbar from './Navbar.jsx';
 import Content from './Content.jsx';
 import Creator from './Creator.jsx';
+import Edit from './Edit.jsx';
 import Classie from './tympanus/classie.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
 
 const appState = (name,id) => (props, state) => ({show: name, id: id});
 
-const states = ["content", "creator"];
+const states = ["content", "creator", "edit"];
 
 // App component - represents the whole app
 class App extends React.Component {
