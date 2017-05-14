@@ -4,13 +4,15 @@ import Content from './Content.jsx';
 import Creator from './Creator.jsx';
 import Edit from './Edit.jsx';
 import Settings from './Settings.jsx';
+import Help from './Help.jsx';
+import About from './About.jsx';
 import Classie from './tympanus/classie.js';
 import Main from './tympanus/main.js';
 import Modernizr from './tympanus/modernizr-custom.js';
 
 const appState = (name,id) => (props, state) => ({show: name, id: id});
 
-const states = ["content", "creator", "edit", "settings"];
+const states = ["content", "creator", "edit", "settings", "help", "about"];
 
 // App component - represents the whole app
 class App extends React.Component {
@@ -36,6 +38,10 @@ class App extends React.Component {
         return (<Edit className="content" go={this.go.bind(this)} id={this.state.id} />);
       case "settings":
         return (<Settings className="content" go={this.go.bind(this)} />);
+      case "help":
+        return (<Help className="content" go={this.go.bind(this)} />);
+      case "about":
+        return (<About className="content" go={this.go.bind(this)} />);
     }
   }
 
