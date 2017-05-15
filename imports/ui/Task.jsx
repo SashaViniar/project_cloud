@@ -6,9 +6,19 @@ import classnames from 'classnames';
 const fadeo = el => () =>
   $( el ).fadeOut( "slow", ()=>{});
 
+const toggle = (state, props) => ({show: !state.show});
+
+const Togglable = props => (
+  props.show ? <div className="col-md-12">{props.children}</div> : null
+);
+
 
 // Task component - represents a single todo item
 export default class Task extends Component {
+    constructor(){
+      super();
+      this.state = {show: false};     
+    }
     toggleChecked() {
         // Set the checked property to the opposite of its current value    
         Meteor.call('tasks.setChecked', this.props.task._id, !this.props.task.checked);
@@ -19,6 +29,9 @@ export default class Task extends Component {
     }
     togglePrivate() {
         Meteor.call('tasks.setPrivate', this.props.task._id, !this.props.task.private);
+    }
+    toggleDescription() {
+      this.setState(toggle);
     }
     edit() {
       this.props.go("edit", this.props.task.id);
@@ -43,14 +56,15 @@ export default class Task extends Component {
             <div>Task {this.props.task.name} created by {this.props.task.username}</div>
           </div>
           <div className="col-md-6">
-            <button className="btn btn-primary" style={{float:"right"}}>Description</button>
+            <button className="btn btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</button>
             <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
             <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
             <button className="btn btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
           </div>
-
-
         </div>
+
+        
+        <Togglable show={this.state.show}>
         <div className="row col-md-12" >
           <div className = "col-md-1"></div>
           <p className = "row text-justify col-md-10">{this.props.task.description}</p>
@@ -103,6 +117,7 @@ export default class Task extends Component {
             </div>
           </div>
         </div>
+        </Togglable>
       </div>
     </div>
 
@@ -121,7 +136,3 @@ Task.propTypes = {
     task: PropTypes.object.isRequired,
     showPrivateButton: React.PropTypes.bool.isRequired,
 };
-
-  $(document).on('click', '.btn-primary', function() {
-      $(this).parents('.task').find('.col-md-12').toggle();
-    });
