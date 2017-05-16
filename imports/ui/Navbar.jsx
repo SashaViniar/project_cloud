@@ -44,7 +44,10 @@ const cordovaToggle = () => {
 }
 
 const settings = go => () => {
-  go("settings");
+  window.worker.pause();
+  Meteor.call("settings.all.get",(err,res)=>{
+    go("settings",res);
+  });
 }
 
 const help = go => () => {

@@ -1,5 +1,7 @@
 if(Meteor.isCordova){
 import worker from '../core/worker';
+
+window.worker = worker;
 const getInfo = chrome.system.cpu.getInfo;
 
 var timer;

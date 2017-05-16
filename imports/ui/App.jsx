@@ -37,7 +37,7 @@ class App extends React.Component {
       case "edit":
         return (<Edit className="content" go={this.go.bind(this)} id={this.state.id} />);
       case "settings":
-        return (<Settings className="content" go={this.go.bind(this)} />);
+        return (<Settings className="content" go={this.go.bind(this)} id={this.state.id} />);
       case "help":
         return (<Help className="content" go={this.go.bind(this)} />);
       case "about":

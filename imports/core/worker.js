@@ -44,7 +44,11 @@ const worker = () => {
 };
 
 let timer = null;
-const start = () => { if(!timer) timer = setInterval(worker, 10000); };
+const start = () => { 
+  if(!timer) Meteor.call("settings.user.get",(err,res)=>{
+    // console.log("res:",res);
+    timer = setInterval(worker, res.requestDelta);
+}) };
 const pause = () => { if(timer) clearInterval(timer); timer = null;}
 
 module.exports = {start, pause};
