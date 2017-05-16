@@ -12,6 +12,41 @@ const Togglable = props => (
   props.show ? <div className="col-md-12">{props.children}</div> : null
 );
 
+const download = (filename, text) => {
+  let element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+const DataTable = props => (
+  <table className = "table" onClick={()=>download(props.filename+".csv",
+      (typeof props.data=="object") ?
+          props.data
+          .reduce((a,b)=>a.concat(b))
+          .map(row => 
+            row.join(", "))
+          .join("\n") :
+          props.data
+    )}>
+    <tbody>
+      {
+        (typeof props.data=="object") ?
+          props.data.reduce((a,b)=>a.concat(b)).map((row,i) => 
+            <tr key={i}>{row.map((el,j)=>
+              <td key={j}>{el.toFixed(2)}</td>)}
+            </tr>) :
+          <tr><td>{props.data}</td></tr>
+      }
+    </tbody>
+  </table>
+);
 
 // Task component - represents a single todo item
 export default class Task extends Component {
@@ -84,36 +119,15 @@ export default class Task extends Component {
               Data
             </div>
             <div className="border-block">
-              <table className = "table ">
-              <tbody>
-                {
-                  (typeof this.props.task.data=="object") ?
-                    this.props.task.data.reduce((a,b)=>a.concat(b)).map((row,i) => 
-                      <tr key={i}>{row.map((el,j)=>
-                        <td key={j}>{el}</td>)}
-                      </tr>) :
-                    <tr><td>{this.props.task.data}</td></tr>
-                }
-                </tbody>
-              </table>
+              <DataTable data={this.props.task.data} filename="data" />
             </div>
           </div>
           <div className="col-md-12">
             <div className="row text-center">
               Output
             </div>
-            <div className="border-block" onClick = {this.toggleChecked.bind(this)}>
-              <table className = "table">
-              <tbody>
-                {
-                  (typeof this.props.task.output=="object") ?
-                    this.props.task.output.reduce((a,b)=>a.concat(b)).map((row,i) => 
-                      <tr key={i}>{row.map((el,j)=>
-                        <td key={j}>{el}</td>)}
-                      </tr>) :
-                    <tr><td>{this.props.task.output}</td></tr>
-                }</tbody>
-              </table>
+            <div className="border-block">
+              <DataTable data={this.props.task.output} filename="output" />
             </div>
           </div>
         </div>
