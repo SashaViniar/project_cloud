@@ -69,7 +69,7 @@ export default class Task extends Component {
       this.setState(toggle);
     }
     edit() {
-      this.props.go("edit", this.props.task.id);
+      this.props.go("edit", [this.props.task._id, this.props.task.name, this.props.task.description]);
     }
     render() {
         // Give tasks a different className when they are checked off,

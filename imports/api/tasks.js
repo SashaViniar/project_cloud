@@ -214,6 +214,7 @@ if (Meteor.isServer) {
     },
     'tasks.updateBatch'(id, newProps){
       check(newProps, Object);
+      // console.log(newProps, id);
       Tasks.update({groupID: id}, { $set: { name: newProps.name, description: newProps.description}}, {multi: true});
     }
   });

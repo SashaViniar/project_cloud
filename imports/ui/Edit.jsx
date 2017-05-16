@@ -2,9 +2,17 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 
+
 class Edit extends React.Component {
-  handleSubmit(){
-    alert("not implemented yet");
+  handleSubmit(e){
+    e.preventDefault();
+    let name = ReactDOM.findDOMNode(this.refs.name).value;
+    let description = ReactDOM.findDOMNode(this.refs.description).value;
+    // alert(`${name}, ${description}`);
+    name = name ? name : this.props.id[1];
+    description = description ? description : this.props.id[2];
+    Meteor.call("tasks.updateBatch", this.props.id[0], {name, description});
+    $("#dashboard")[0].click();
   }
   render(){
     return(
@@ -24,12 +32,12 @@ class Edit extends React.Component {
               type="text"
               ref="name"
               name="name"
-              placeholder="Type task name here"/>
+              placeholder={this.props.id[1]}/>
             </div>
 
             
           </div>
-          <div className="col-md-12" style = {{"margin-top":"20px"}}>
+          <div className="col-md-12" style = {{"marginTop":"20px"}}>
           <div className="col-md-3">
             <label htmlFor="description" className="">Task description:&nbsp;&nbsp;</label>
           </div>
@@ -39,7 +47,7 @@ class Edit extends React.Component {
               type="text"
               ref="description"
               name="description"
-              placeholder="Type task description here"/>
+              placeholder={this.props.id[2]}/>
             </div>
             
           </div>
