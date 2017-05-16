@@ -47,7 +47,7 @@ class Content extends React.Component {
 		return(
 			<div className={this.props.className}>
 				<header>
-					<h1>Task List ({this.props.incompleteCount})</h1>
+					<h1>Task List ({this.props.incompleteCount} in progress)</h1>
 					<label className="hide-completed">
 						<input
 						type="checkbox"

@@ -85,14 +85,14 @@ export default class Task extends Component {
 
               <div className="row col-md-12" style={{color:"white"}}> 
 
-                <div className="col-md-6">
+                <div className="col-md-6 col-xs-12">
                   <div>Task {this.props.task.name} created by {this.props.task.username}</div>
                 </div>
-                <div className="col-md-6">
-                  <button className="btn btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</button>
-                  <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
-                  <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
-                  <button className="btn btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
+                <div className="col-md-6 col-xs-12">
+                  <button className="btn col-md-3 col-xs-6 btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</button>
+                  <button className="btn col-md-3 col-xs-6 btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
+                  <button className="btn col-md-3 col-xs-6 btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
+                  <button className="btn col-md-3 col-xs-6 btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
                 </div>
               </div>
 
