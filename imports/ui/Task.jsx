@@ -12,6 +12,20 @@ const Togglable = props => (
   props.show ? <div className="col-md-12">{props.children}</div> : null
 );
 
+const DataTable = props => (
+  <table className = "table">
+    <tbody>
+      {
+        (typeof props.data=="object") ?
+          props.data.reduce((a,b)=>a.concat(b)).map((row,i) => 
+            <tr key={i}>{row.map((el,j)=>
+              <td key={j}>{el.toFixed(2)}</td>)}
+            </tr>) :
+          <tr><td>{props.data}</td></tr>
+      }
+    </tbody>
+  </table>
+);
 
 // Task component - represents a single todo item
 export default class Task extends Component {
@@ -84,18 +98,7 @@ export default class Task extends Component {
               Data
             </div>
             <div className="border-block">
-              <table className = "table ">
-              <tbody>
-                {
-                  (typeof this.props.task.data=="object") ?
-                    this.props.task.data.reduce((a,b)=>a.concat(b)).map((row,i) => 
-                      <tr key={i}>{row.map((el,j)=>
-                        <td key={j}>{el}</td>)}
-                      </tr>) :
-                    <tr><td>{this.props.task.data}</td></tr>
-                }
-                </tbody>
-              </table>
+              <DataTable data={this.props.task.data} />
             </div>
           </div>
           <div className="col-md-12">
@@ -103,17 +106,7 @@ export default class Task extends Component {
               Output
             </div>
             <div className="border-block" onClick = {this.toggleChecked.bind(this)}>
-              <table className = "table">
-              <tbody>
-                {
-                  (typeof this.props.task.output=="object") ?
-                    this.props.task.output.reduce((a,b)=>a.concat(b)).map((row,i) => 
-                      <tr key={i}>{row.map((el,j)=>
-                        <td key={j}>{el}</td>)}
-                      </tr>) :
-                    <tr><td>{this.props.task.output}</td></tr>
-                }</tbody>
-              </table>
+              <DataTable data={this.props.task.output} />
             </div>
           </div>
         </div>
