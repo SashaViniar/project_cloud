@@ -9,9 +9,44 @@ const fadeo = el => () =>
 const toggle = (state, props) => ({show: !state.show});
 
 const Togglable = props => (
-  props.show ? <div className="col-md-12">{props.children}</div> : null
+  props.show ? <div className="row col-md-12">{props.children}</div> : null
 );
 
+const download = (filename, text) => {
+  let element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
+const DataTable = props => (
+  <table className = "table" onClick={()=>download(props.filename+".csv",
+      (typeof props.data=="object") ?
+          props.data
+          .reduce((a,b)=>a.concat(b))
+          .map(row => 
+            row.join(", "))
+          .join("\n") :
+          props.data
+    )}>
+    <tbody>
+      {
+        (typeof props.data=="object") ?
+          props.data.reduce((a,b)=>a.concat(b)).map((row,i) => 
+            <tr key={i}>{row.map((el,j)=>
+              <td key={j}>{el.toFixed(2)}</td>)}
+            </tr>) :
+          <tr><td>{props.data}</td></tr>
+      }
+    </tbody>
+  </table>
+);
 
 // Task component - represents a single todo item
 export default class Task extends Component {
@@ -45,81 +80,56 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
-           <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"5%"}}>    
+           <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"1%"}}>    
 
 
-          <div className="task">
-      <div>
-        <div className="row" style={{color:"white"}}> 
+              <div className="row col-md-12" style={{color:"white"}}> 
 
-          <div className="col-md-6" style={{float:"left"}}>
-            <div>Task {this.props.task.name} created by {this.props.task.username}</div>
-          </div>
-          <div className="col-md-6">
-            <button className="btn btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</button>
-            <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
-            <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
-            <button className="btn btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
-          </div>
-        </div>
+                <div className="col-md-6">
+                  <div>Task {this.props.task.name} created by {this.props.task.username}</div>
+                </div>
+                <div className="col-md-6">
+                  <button className="btn btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</button>
+                  <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
+                  <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
+                  <button className="btn btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
+                </div>
+              </div>
 
-        
-        <Togglable show={this.state.show}>
-        <div className="row col-md-12" >
-          <div className = "col-md-1"></div>
-          <p className = "row text-justify col-md-10">{this.props.task.description}</p>
-          <div className = "col-md-1"></div>
-        </div>
-        <div className="col-md-12">
-          <div className="col-md-6">
-            <div className="row text-center">
-              Algorithm
-            </div>
-            <div className="border-block">
-                <pre>{this.props.task.algorithm}</pre>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="row text-center">
-              Data
-            </div>
-            <div className="border-block">
-              <table className = "table ">
-              <tbody>
-                {
-                  (typeof this.props.task.data=="object") ?
-                    this.props.task.data.reduce((a,b)=>a.concat(b)).map((row,i) => 
-                      <tr key={i}>{row.map((el,j)=>
-                        <td key={j}>{el}</td>)}
-                      </tr>) :
-                    <tr><td>{this.props.task.data}</td></tr>
-                }
-                </tbody>
-              </table>
-            </div>
-          </div>
-          <div className="col-md-12">
-            <div className="row text-center">
-              Output
-            </div>
-            <div className="border-block" onClick = {this.toggleChecked.bind(this)}>
-              <table className = "table">
-              <tbody>
-                {
-                  (typeof this.props.task.output=="object") ?
-                    this.props.task.output.reduce((a,b)=>a.concat(b)).map((row,i) => 
-                      <tr key={i}>{row.map((el,j)=>
-                        <td key={j}>{el}</td>)}
-                      </tr>) :
-                    <tr><td>{this.props.task.output}</td></tr>
-                }</tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        </Togglable>
-      </div>
-    </div>
+              
+              <Togglable show={this.state.show}>
+              <div className="row col-md-12" >
+                <div className = "col-md-1"></div>
+                <p className = "row text-justify col-md-10">{this.props.task.description}</p>
+                <div className = "col-md-1"></div>
+              </div>
+              <div className="col-md-12">
+                <div className="col-md-6">
+                  <div className="row text-center">
+                    Algorithm
+                  </div>
+                  <div className="border-block">
+                      <pre>{this.props.task.algorithm}</pre>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="row text-center">
+                    Data
+                  </div>
+                  <div className="border-block">
+                    <DataTable data={this.props.task.data} filename="data" />
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="row text-center">
+                    Output
+                  </div>
+                  <div className="border-block">
+                    <DataTable data={this.props.task.output} filename="output" />
+                  </div>
+                </div>
+              </div>
+              </Togglable>
 
 
     </li>

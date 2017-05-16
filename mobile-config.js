@@ -5,8 +5,11 @@ App.info({
   author: 'Mnxoid & Caiaboss & Maya'
 });
 // Set up resources such as icons and launch screens.
-// App.icons({
-//   'iphone': 'icons/icon-60.png',
-//   'iphone_2x': 'icons/icon-60@2x.png',
-//   // More screen sizes and platforms...
-// });
+App.icons({
+  'android_mdpi': 'icons/icon_mdpi.png',
+  'android_hdpi': 'icons/icon_hdpi.png',
+  'android_xhdpi': 'icons/icon_xhdpi.png',
+  'android_xxhdpi': 'icons/icon_xxhdpi.png',
+  'android_xxxhdpi': 'icons/icon_xxxhdpi.png'
+  // More screen sizes and platforms...
+});
