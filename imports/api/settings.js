@@ -5,12 +5,11 @@ import { check } from 'meteor/check';
 export const Settings = new Mongo.Collection('settings');
 Ground.Collection(Settings);
 
-if(Meteor.isServer){
   Meteor.methods({
     'settings.user.get'() {
       // console.log("settings.user.get got called");
       const settings = Settings.findOne({owner: this.userId, type: 'user'});
-      if(settings) return settings.settings;
+      if(settings && settings.settings) return settings.settings;
       else return {
         requestDelta: 10000,
         cpuThreshold: 0.7
@@ -19,11 +18,24 @@ if(Meteor.isServer){
     'settings.server.get'() {
       // console.log("settings.server.get got called");
       const settings = Settings.findOne({type: 'server'});
-      if(settings) return settings.settings;
+      if(settings && settings.settings) return settings.settings;
       else return {
         bigDataCount: 2,
         expiryDelta: 300000
       };
+    },
+    'settings.all.get'(){
+      return {
+        user: Meteor.call('settings.user.get'),
+        server: Meteor.call('settings.server.get')
+      }
+    },
+  });
+if(Meteor.isServer){
+  Meteor.methods({
+    'settings.all.set'(newUserSettings, newServerSettings){
+      Meteor.call('settings.user.set', newUserSettings);
+      Meteor.call('settings.server.set', newServerSettings);
     },
     'settings.user.set'(newSettings) {
       // console.log("settings.user.set got called");

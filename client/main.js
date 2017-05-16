@@ -69,6 +69,7 @@ if(Meteor.isCordova){
 // TODO: move to imports/cordova/events.js
 // TODO: make interval configurable
 if(Meteor.isClient &&! Meteor.isCordova){
+  window.worker = worker;
   Meteor.startup(() => {
     worker.start();
   });

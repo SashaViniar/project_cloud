@@ -80,6 +80,7 @@ if (Meteor.isServer) {
   Meteor.methods({
     'tasks.get'() {
       const task = Tasks.findOne({checked: false, expiry: {$lt: new Date()}}, {sort:{$natural:-1}});//TODO: priority,etc
+      // console.log(Meteor.call('settings.server.get'));
       const delta = Meteor.call('settings.server.get').expiryDelta;
       // console.log(delta);
       if(task){
@@ -214,6 +215,7 @@ if (Meteor.isServer) {
     },
     'tasks.updateBatch'(id, newProps){
       check(newProps, Object);
+      // console.log(newProps, id);
       Tasks.update({groupID: id}, { $set: { name: newProps.name, description: newProps.description}}, {multi: true});
     }
   });

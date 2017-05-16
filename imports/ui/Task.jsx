@@ -9,7 +9,7 @@ const fadeo = el => () =>
 const toggle = (state, props) => ({show: !state.show});
 
 const Togglable = props => (
-  props.show ? <div className="col-md-12">{props.children}</div> : null
+  props.show ? <div className="row col-md-12">{props.children}</div> : null
 );
 
 const download = (filename, text) => {
@@ -69,7 +69,7 @@ export default class Task extends Component {
       this.setState(toggle);
     }
     edit() {
-      this.props.go("edit", this.props.task.id);
+      this.props.go("edit", [this.props.task._id, this.props.task.name, this.props.task.description]);
     }
     render() {
         // Give tasks a different className when they are checked off,
@@ -80,60 +80,56 @@ export default class Task extends Component {
             private: this.props.task.private,
         });
         return (
-           <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"5%"}}>    
+           <li className={taskClassName + " navbar navbar-inverse color-white"} style = {{margin:"1%"}}>    
 
 
-          <div className="task">
-      <div>
-        <div className="row" style={{color:"white"}}> 
+              <div className="row col-md-12" style={{color:"white"}}> 
 
-          <div className="col-md-6" style={{float:"left"}}>
-            <div>Task {this.props.task.name} created by {this.props.task.username}</div>
-          </div>
-          <div className="col-md-6">
-            <button className="btn btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</button>
-            <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
-            <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
-            <button className="btn btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
-          </div>
-        </div>
+                <div className="col-md-6">
+                  <div>Task {this.props.task.name} created by {this.props.task.username}</div>
+                </div>
+                <div className="col-md-6">
+                  <button className="btn btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</button>
+                  <button className="btn btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</button>
+                  <button className="btn btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</button>
+                  <button className="btn btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</button>
+                </div>
+              </div>
 
-        
-        <Togglable show={this.state.show}>
-        <div className="row col-md-12" >
-          <div className = "col-md-1"></div>
-          <p className = "row text-justify col-md-10">{this.props.task.description}</p>
-          <div className = "col-md-1"></div>
-        </div>
-        <div className="col-md-12">
-          <div className="col-md-6">
-            <div className="row text-center">
-              Algorithm
-            </div>
-            <div className="border-block">
-                <pre>{this.props.task.algorithm}</pre>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="row text-center">
-              Data
-            </div>
-            <div className="border-block">
-              <DataTable data={this.props.task.data} filename="data" />
-            </div>
-          </div>
-          <div className="col-md-12">
-            <div className="row text-center">
-              Output
-            </div>
-            <div className="border-block">
-              <DataTable data={this.props.task.output} filename="output" />
-            </div>
-          </div>
-        </div>
-        </Togglable>
-      </div>
-    </div>
+              
+              <Togglable show={this.state.show}>
+              <div className="row col-md-12" >
+                <div className = "col-md-1"></div>
+                <p className = "row text-justify col-md-10">{this.props.task.description}</p>
+                <div className = "col-md-1"></div>
+              </div>
+              <div className="col-md-12">
+                <div className="col-md-6">
+                  <div className="row text-center">
+                    Algorithm
+                  </div>
+                  <div className="border-block">
+                      <pre>{this.props.task.algorithm}</pre>
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <div className="row text-center">
+                    Data
+                  </div>
+                  <div className="border-block">
+                    <DataTable data={this.props.task.data} filename="data" />
+                  </div>
+                </div>
+                <div className="col-md-12">
+                  <div className="row text-center">
+                    Output
+                  </div>
+                  <div className="border-block">
+                    <DataTable data={this.props.task.output} filename="output" />
+                  </div>
+                </div>
+              </div>
+              </Togglable>
 
 
     </li>
