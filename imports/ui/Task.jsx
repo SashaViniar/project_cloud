@@ -12,8 +12,29 @@ const Togglable = props => (
   props.show ? <div className="col-md-12">{props.children}</div> : null
 );
 
+const download = (filename, text) => {
+  let element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}
+
 const DataTable = props => (
-  <table className = "table">
+  <table className = "table" onClick={()=>download(props.filename+".csv",
+      (typeof props.data=="object") ?
+          props.data
+          .reduce((a,b)=>a.concat(b))
+          .map(row => 
+            row.join(", "))
+          .join("\n") :
+          props.data
+    )}>
     <tbody>
       {
         (typeof props.data=="object") ?
@@ -98,15 +119,15 @@ export default class Task extends Component {
               Data
             </div>
             <div className="border-block">
-              <DataTable data={this.props.task.data} />
+              <DataTable data={this.props.task.data} filename="data" />
             </div>
           </div>
           <div className="col-md-12">
             <div className="row text-center">
               Output
             </div>
-            <div className="border-block" onClick = {this.toggleChecked.bind(this)}>
-              <DataTable data={this.props.task.output} />
+            <div className="border-block">
+              <DataTable data={this.props.task.output} filename="output" />
             </div>
           </div>
         </div>
