@@ -87,21 +87,21 @@ class Creator extends React.Component {
               placeholder="Type task description here"/>
           </div>
           <div className="col-md-12 row">
-            <div className="col-md-4 col-xs-12">
+            <div className="col-md-6 col-xs-12">
               <TextFileUploader 
                 className="col-md-12" 
                 name="algorithm"
                 caption="Data processing algorithm:"
                 ref="algorithm"/>
             </div>
-            <div className="col-md-4 col-xs-12">
+            <div className="col-md-6 col-xs-12">
               <TextFileUploader 
                 className="col-md-12" 
                 name="data"
                 caption="Data to process(CSV):"
                 ref="data"/>
             </div>
-            <div className="col-md-4 col-xs-12"><div className="col-md-12 dummy">REDUCER(OPTIONAL):<br/>COMING SOON</div></div>
+            
           </div>
           <div className="col-md-12 centr">
             <button>Submit task</button>
@@ -115,6 +115,6 @@ class Creator extends React.Component {
 export default Creator;
 
 //TODO: Implement dragover animations
-
+//<div className="col-md-4 col-xs-12"><div className="col-md-12 dummy">REDUCER(OPTIONAL):<br/>COMING SOON</div></div>
 
 
