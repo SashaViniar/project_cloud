@@ -89,10 +89,10 @@ export default class Task extends Component {
                   <div>Task {this.props.task.name} created by {this.props.task.username}</div>
                 </div>
                 <div className="col-md-6 col-xs-12 mt-13">
-                  <div className="btn col-md-3 col-xs-6 btn-primary" style={{float:"right"}} onClick={this.toggleDescription.bind(this)}>Description</div>
-                  <div className="btn col-md-3 col-xs-6 btn-danger" style={{float:"right"}} onClick={this.deleteThisTask.bind(this)}>Delete</div>
-                  <div className="btn col-md-3 col-xs-6 btn-success" style={{float:"right"}} onClick = {this.toggleChecked.bind(this)}>Recalculate</div>
-                  <div className="btn col-md-3 col-xs-6 btn-info" style={{float:"right"}} onClick = {this.edit.bind(this)}>Edit</div>
+                  <div className="btn col-md-3 col-xs-6 btn-info" onClick = {this.edit.bind(this)}>Edit</div>
+                  <div className="btn col-md-3 col-xs-6 btn-success" onClick = {this.toggleChecked.bind(this)}>Recalculate</div>
+                  <div className="btn col-md-3 col-xs-6 btn-danger" onClick={this.deleteThisTask.bind(this)}>Delete</div>
+                  <div className="btn col-md-3 col-xs-6 btn-primary" onClick={this.toggleDescription.bind(this)}>Description</div>
                 </div>
               </div>
 
