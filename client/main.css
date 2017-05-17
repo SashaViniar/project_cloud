@@ -47,6 +47,20 @@
     .table{
       margin-bottom: 0px !important;
     }
+    @media only screen and (min-width: 992px) {
+      .mt-13{
+        margin-top: -13px;
+      }
+      .lh-50{
+        line-height: 50%;
+      }
+    }
+
+    @media only screen and (max-width: 992px) {
+      .lh-50{
+        margin-top: -13px;
+      }
+    }
 
 /*.blur:before{
   -webkit-filter: blur(3px);
